@@ -26,48 +26,61 @@ let questionSchema = new mongoose.Schema({
   answers: [answerSchema] // subdoc
 });
 
-// FAKE DATA GENERATORS
+// GENERATE FAKE DATA
 
-var genQuestions = function (numProducts) {
+var genAnswers = function (min = 1, max) {
+  var answers = [];
+
+  var rnd = Math.floor(Math.random() * (max - min + 1) + min);
+  for (let n = 0; n < rnd; n++) {
+    answers.push({
+      text: faker.lorem.sentence(),
+      date: faker.date.past(),
+      user: {
+        nickname: faker.internet.userName(),
+        email: faker.internet.email(),
+        location: faker.address.city() + ', ' + faker.address.stateAbbr()
+      },
+      useful: { yes: faker.random.number({ min: 0, max: 15 }), no: faker.random.number({ min: 0, max: 5 }) }
+    });
+  }
+  return answers;
+};
+
+var genQuestions = function (min, max) {
+  const numProducts = 100;
   var questions = [];
 
   for (let product_id = 0; product_id < numProducts; product_id++) {
-    // generate 0-20 questions for the product
-    var rnd = Math.floor(20 * Math.random());
+
+    var rnd = Math.floor(Math.random() * (max - min + 1) + 1);
     for (let i = 0; i < rnd; i++) {
       questions.push({
         product_id: product_id,
-        text: faker.lorem.sentence(),
+        text: faker.lorem.sentence() + ' Why so angry?',
         date: faker.date.past(),
         user: {
           nickname: faker.internet.userName(),
           email: faker.internet.email(),
           location: faker.address.city() + ', ' + faker.address.stateAbbr()
         },
-        answers: [{
-          text: faker.lorem.sentence(),
-          date: faker.date.past(),
-          user: {
-            nickname: faker.internet.userName(),
-            email: faker.internet.email(),
-            location: faker.address.city() + ', ' + faker.address.stateAbbr()
-          },
-          useful: { yes: faker.random.number({ min: 0, max: 15 }), no: faker.random.number({ min: 0, max: 5 }) }
-        }]
+        answers: genAnswers(0, 15)
       });
     }
   }
   return questions;
 };
 
+// INSERT FAKE DATA INTO DB
 
-// INVOKE QUESTION GENERATION AND ADD TO DB
+const QuestionModel = mongoose.model('question', questionSchema);
 
-let QuestionModel = mongoose.model('question', questionSchema);
+const questionList = genQuestions(0, 15);
 
-QuestionModel.insertMany(genQuestions(100))
+QuestionModel.insertMany(questionList)
 .then(() => {
   console.log('Data written to DB. \nDB Connection Closed.');
   mongoose.connection.close();
 })
 .catch((err) => console.log(err))
+
