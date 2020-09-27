@@ -74,7 +74,6 @@ var genQuestions = function (min, max) {
 // INSERT FAKE DATA INTO DB
 
 const QuestionModel = mongoose.model('question', questionSchema);
-
 const questionList = genQuestions(0, 15);
 
 QuestionModel.insertMany(questionList)
