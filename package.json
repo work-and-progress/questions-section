@@ -1,12 +1,14 @@
 {
-  "name": "fec-zwilling-questions",
+  "name": "my-webpack-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "My webpack project",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --open",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "seed": "node database/seed.js"
+    "seed": "node database/seed.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -25,20 +27,28 @@
     "faker": "^5.1.0",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.6",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
-    "eslint": "^7.2.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "css-loader": "^4.3.0",
+    "eslint": "^7.10.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.2",
-    "eslint-plugin-react-hooks": "^4.0.0",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "react-cli": "^0.3.1",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^4.2.2",
+    "webpack-dev-server": "^3.11.0"
   }
 }
