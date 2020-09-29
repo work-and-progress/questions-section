@@ -1,11 +1,18 @@
 import React from 'react';
 
-function QuestionsTopNav () {
+function QuestionsTopNav({ handleAsk }) {
   return (
     <div>
-      <h2>QuestionsTopNav</h2>
+      <div>
+        <span>REVIEWS </span>
+        <span>QUESTIONS</span>
+      </div>
+      <div>
+        <span>Questions</span>
+        <button type="button" id="ask" onClick={handleAsk}>ASK A QUESTION</button>
+      </div>
     </div>
-  )
-};
+  );
+}
 
 export default QuestionsTopNav;

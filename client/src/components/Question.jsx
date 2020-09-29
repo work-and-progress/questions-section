@@ -1,11 +1,19 @@
 import React from 'react';
 
-function Question () {
-  return (
-    <div>
-      <h3>Question</h3>
-    </div>
-  )
-};
+class Question extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>Question 1</h3>
+      </div>
+    );
+  }
+}
 
 export default Question;

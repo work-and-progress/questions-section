@@ -1,14 +1,12 @@
 import React from 'react';
-import Questions from './Questions.jsx';
+import Questions from './Questions';
 
-function App () {
-    return (
-      <div>
-        <h1>App - what a pain</h1>
-        <Questions />
-      </div>
-    )
-  // }
-};
+function App() {
+  return (
+    <div>
+      <Questions />
+    </div>
+  );
+}
 
 export default App;
