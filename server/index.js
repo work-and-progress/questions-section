@@ -6,11 +6,10 @@ const db = require('../database/index.js')
 const app = express();
 const port = 3000;
 
-// app.use(express.static(__dirname + '../client/dist')); // why doesn't thiswork?
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded());
 
 // GET all questions
 app.get('/questions/:id', (req, res) => {
