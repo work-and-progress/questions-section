@@ -1,6 +1,6 @@
 import React from 'react';
 
-function QuestionsTopNav({ handleAsk }) {
+function QuestionsTopNav({ handleClick }) {
   return (
     <div>
       <div>
@@ -9,7 +9,7 @@ function QuestionsTopNav({ handleAsk }) {
       </div>
       <div>
         <span>Questions</span>
-        <button type="button" id="ask" onClick={handleAsk}>ASK A QUESTION</button>
+        <button type="button" id="ask" onClick={handleClick}>ASK A QUESTION</button>
       </div>
     </div>
   );
