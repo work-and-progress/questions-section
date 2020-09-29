@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import QuestionsTopNav from './QuestionsTopNav.jsx';
 
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import '../setupTests.js'
 
 describe('QuestionTopNav unit tests', () => {
@@ -14,6 +14,12 @@ describe('QuestionTopNav unit tests', () => {
     const tabTitle = <span>QUESTIONS</span>;
     expect(wrapper.contains(tabTitle)).toEqual(true);
   });
-  // it('"ASK A QUESTION" button invokes handler', () => {
-  // });
+  it('should call a function when button is clicked', () => {
+    const mockFn = jest.fn();
+    const wrapper = mount(
+      <QuestionsTopNav handleClick={mockFn} />
+    );
+    wrapper.find('button').simulate('click')
+    expect(mockFn).toHaveBeenCalled();
+  })
 });
