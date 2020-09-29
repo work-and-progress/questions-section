@@ -13,10 +13,7 @@ app.use(bodyParser.json());
 // GET all questions
 app.get('/questions/:id', (req, res) => {
 
-  // REFACTOR THIS TO GET PARAM FROM GET REQUEST
-  const id = req.params.id;
-
-  db.getAllQuestions(id, (err, results) => {
+  db.getAllQuestions(req.params.id, (err, results) => {
     if (err) {
       res.status(404).send('Error in app.get - getting questions');
     } else {
