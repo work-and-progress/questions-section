@@ -29,7 +29,7 @@ const questionSchema = new mongoose.Schema({
 
 // GENERATE FAKE DATA
 
-const genAnswers = function (min = 1, max) {
+const genAnswers = (min = 1, max) => {
   const answers = [];
 
   const rnd = Math.floor(Math.random() * (max - min + 1) + min);
@@ -51,7 +51,7 @@ const genAnswers = function (min = 1, max) {
   return answers;
 };
 
-const genQuestions = function (min, max) {
+const genQuestions = (min, max) => {
   const numProducts = 100;
   const questions = [];
 
