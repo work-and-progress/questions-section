@@ -1,14 +1,16 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('../database/index.js')
 
 const app = express();
 const port = 3000;
 
-app.use(express.static(__dirname + '/../client/dist'));
+// app.use(express.static(__dirname + '../client/dist')); // why doesn't thiswork?
+app.use('/', express.static(path.join(__dirname, '../client/dist')));
+
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded());
-
 
 // GET all questions
 app.get('/questions/:id', (req, res) => {
@@ -23,9 +25,8 @@ app.get('/questions/:id', (req, res) => {
   });
 });
 
-
 app.listen(port, () => {
-  console.log(`Listening on port ${port}. Is there anybody out there?`);
+  console.log(`Listening on port ${port}. \nIs there anybody out there?`);
 });
 
 
