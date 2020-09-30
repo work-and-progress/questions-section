@@ -1,23 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import QuestionsTopNav from './QuestionsTopNav.jsx';
-
 import { shallow, mount } from 'enzyme';
-import '../setupTests.js'
+// import '../../../setupTests.js';
 
 describe('QuestionTopNav unit tests', () => {
+
   it ('Renders without crashing', () => {
     shallow(<QuestionsTopNav />);
   });
-  it("renders QUESTIONS header", () => {
+
+  it("Renders Questions title", () => {
     const wrapper = shallow(<QuestionsTopNav />);
-    const tabTitle = <span>QUESTIONS</span>;
+    const tabTitle = 'Questions';
     expect(wrapper.contains(tabTitle)).toEqual(true);
   });
-  it('should call a function when button is clicked', () => {
+
+  it('Calls a function when button is clicked', () => {
     const mockFn = jest.fn();
     const wrapper = mount(
-      <QuestionsTopNav handleClick={mockFn} />
+      <QuestionsTopNav handleAsk={mockFn} />
     );
     wrapper.find('button').simulate('click')
     expect(mockFn).toHaveBeenCalled();
