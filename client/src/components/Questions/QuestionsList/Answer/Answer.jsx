@@ -1,13 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import style from './Answer.css';
 
-function Answer () {
+function Answer({ answer }) {
   return (
-    <div>
-      <h1>Answer</h1>
-      <QuestionsTopNav />
-      <QuestionsList />
+    <div className={style.answer}>
+      <span>{answer.text}</span>
     </div>
-  )
+  );
+}
+
+Answer.propTypes = {
+  answer: PropTypes.object,
+  // answer.text: PropTypes.string,
+};
+
+Answer.defaultProps = {
+  answer: {},
+  // answer.text: '',
 };
 
 export default Answer;
