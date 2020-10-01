@@ -16,7 +16,7 @@ function QuestionsList({ questions }) {
 QuestionsList.propTypes = {
   questions: PropTypes.array,
   question: PropTypes.string,
-  question.date: PropTypes.string,
+  // question.date: PropTypes.string,
 };
 
 QuestionsList.defaultProps = {
