@@ -33,8 +33,13 @@ const questionSchema = new mongoose.Schema({
 // })
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 const genAnswers = (min = 1, max) => {
   const answers = [];
+=======
+var genAnswers = function (min = 1, max) {
+  var answers = [];
+>>>>>>> Stashed changes
 =======
 var genAnswers = function (min = 1, max) {
   var answers = [];
@@ -56,6 +61,7 @@ var genAnswers = function (min = 1, max) {
   return answers;
 };
 
+<<<<<<< Updated upstream
 const genQuestions = (min, max) => {
   const numProducts = 100;
   const questions = [];
@@ -76,6 +82,17 @@ const genQuestions = (min, max) => {
       });
     }
 
+=======
+var genQuestions = function (product_id, min, max) {
+  var questions = [];
+
+  var rnd = Math.floor(Math.random() * (max - min + 1) + min);
+  for (let n = 0; n < rnd; n++) {
+    questions.push({
+      product_id: product_id,
+
+    });
+>>>>>>> Stashed changes
   }
   return questions;
 };
