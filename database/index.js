@@ -1,84 +1,40 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/unzwilling', {useNewUrlParser: true, useUnifiedTopology: true});
 
-const db = mongoose.connection;
+mongoose.connect('mongodb://localhost/unzwilling', { useNewUrlParser: true, useUnifiedTopology: true });
 
-let userSchema = new mongoose.Schema({
+// SCHEMAs
+
+const userSchema = new mongoose.Schema({
   nickname: String,
   email: String,
-  location: String
+  location: String,
 });
 
+const answerSchema = new mongoose.Schema({
+  text: String,
+  date: Date,
+  user: userSchema, // subdoc
+  useful: { yes: Number, no: Number },
+});
 
-let Users = mongoose.model('Users', userSchema);
-
-let questionSchema = mongoose.Schema({
+const questionSchema = new mongoose.Schema({
   product_id: String,
   text: String,
   date: Date,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Users'
-  },
-  answers: []
+  user: userSchema,
+  answers: [answerSchema], // subdoc
 });
 
-let Questions = mongoose.model('Questions', questionSchema);
+// QUERIES
 
-let answerSchema = mongoose.Schema({
-  question_id: String,
-  text: String,
-  date: Date,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Users'
-  },
-  useful: {
-    yes: Number,
-    no: Number
-  }
-});
+const QuestionModel = mongoose.model('questions', questionSchema);
 
-let Answers = mongoose.model('Answers', answerSchema);
+const getAllQuestions = function (id, callback) {
+  return QuestionModel.find({ product_id: id }).limit(25)
+    .then((questions) => callback(null, questions))
+    .catch((err) => callback(err));
+};
 
-// test for db insertions
-
-let testUser = new Users({
-  nickname: 'Spongebob',
-  location: 'Bikini Bottom',
-  email: 'spongebob@bikinibottom.com'
-});
-
-testUser.save((err) => {
-  if (err) return console.log(err);
-});
-
-
-let testQuestion = new Questions({
-  text: 'First Question!',
-  date: new Date(),
-  user: testUser,
-  answers: [testUser, testUser]
-});
-
-testQuestion.save((err) => {
-  if (err) return console.log(err);
-});
-
-
-let testAnswer = new Answers({
-  text: 'First Answer',
-  date: new Date(),
-  user: testUser,
-});
-
-testAnswer.save((err) => {
-  if (err) return console.log(err);
-});
-
-const fakeData = require('./fakeDataGenerator.js');
-
-const test = fakeData.genFakeQuestions(100);
-
-console.log('FAKE QUESTION TEST');
-console.log(test);
+module.exports = {
+  getAllQuestions,
+};
