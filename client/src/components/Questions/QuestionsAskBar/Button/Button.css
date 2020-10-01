@@ -1,0 +1,12 @@
+.askButton {
+  color: #FFFFFF;
+  background-color: #ED1923;
+  font: futura;
+  font-size: 14px;
+  font-weight: bold;
+  border-style: none;
+  padding: 7px 14px;
+  width: 149px;
+  height: 29px;
+  margin: 0;
+}

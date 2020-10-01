@@ -1,9 +1,10 @@
 import React from 'react';
-import Questions from './Questions';
+import Questions from './Questions/Questions';
+import style from './App.css';
 
 function App() {
   return (
-    <div>
+    <div className={style.container}>
       <Questions />
     </div>
   );
