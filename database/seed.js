@@ -35,7 +35,7 @@ const questionSchema = new mongoose.Schema({
 const genAnswers = (min = 1, max) => {
   const answers = [];
 
-  var rnd = Math.floor(Math.random() * (max - min + 1) + min);
+  const rnd = Math.floor(Math.random() * (max - min + 1) + min);
   for (let n = 0; n < rnd; n++) {
     answers.push({
       text: faker.lorem.sentence(),
