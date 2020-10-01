@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   entry: `${__dirname}/client/src/index.jsx`,
   module: {
@@ -15,13 +17,11 @@ module.exports = {
     ],
   },
   output: {
-    // filename: '[name].bundle.js',
-    filename: 'bundle.js',
-    path: `${__dirname}/client/dist`,
+    filename: '[name].bundle.js',
+    path: path.join(__dirname, '/client/dist'),
   },
   devServer: {
-    contentBase: `${__dirname}/client/dist}`,
-    port: 3000,
-    // proxy: 'http://localhost:3000',
+    contentBase: path.join(__dirname, '/client/dist'),
   },
+  resolve: { extensions: ['.js', '.jsx'] },
 };
