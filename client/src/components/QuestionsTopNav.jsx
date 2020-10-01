@@ -1,6 +1,7 @@
 import React from 'react';
 
 function QuestionsTopNav({ handleClick }) {
+
   return (
     <div>
       <div>
@@ -9,7 +10,9 @@ function QuestionsTopNav({ handleClick }) {
       </div>
       <div>
         <span>Questions</span>
+
         <button type="button" id="ask" onClick={handleClick}>ASK A QUESTION</button>
+
       </div>
     </div>
   );
