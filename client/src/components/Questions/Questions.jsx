@@ -1,13 +1,18 @@
 import React from 'react';
+import axios from 'axios';
+
 import QuestionsTab from './QuestionsTab/QuestionsTab';
-import QuestionsTopNav from './QuestionsTopNav/QuestionsTopNav';
+import QuestionsAskBar from './QuestionsAskBar/QuestionsAskBar';
 import QuestionsList from './QuestionsList/QuestionsList';
-// import style from './Questions.css';
+import QuestionsControlBar from './QuestionsControlBar/QuestionsControlBar';
+import style from './Questions.css';
+
 
 class Questions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      questions: []
     };
     this.handleAsk = this.handleAsk.bind(this);
   }
@@ -17,20 +22,31 @@ class Questions extends React.Component {
     this.setState();
   }
 
+  getQuestions() {
+    axios({
+      method: 'get',
+      url: 'http://localhost:8080/questions/1'
+    })
+      .then(res => {
+        this.setState({
+          questions: [...res.data]
+        });
+        // console.log('====== Get Questions ======')
+        // console.log(this.state.questions);
+      })
+      .catch('Error getting questions');
+  }
+
+  componentDidMount() {
+    this.getQuestions();
+  }
+
   render() {
     return (
-      <div
-        style={{
-          // display: 'grid',
-          // gridTemplateColumns: 'auto 850px auto',
-          // justifyContent: 'center',
-          // gridColumnStart: '1',
-          // gridColumnStart: '1',
-          // gridColumnEnd:  '2',
-        }}
-      >
+      <div className={ style.container }>
         <QuestionsTab />
-        <QuestionsTopNav handleAsk={this.handleAsk} />
+        <QuestionsAskBar handleAsk={this.handleAsk} />
+        <QuestionsControlBar />
         <QuestionsList />
       </div>
     );

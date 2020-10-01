@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import QuestionsTab from './QuestionsTab.jsx';
 import { shallow, mount } from 'enzyme';
-// import '../../../setupTests.js';
 
 describe('QuestionsTab unit tests', () => {
   it ('Renders without crashing', () => {

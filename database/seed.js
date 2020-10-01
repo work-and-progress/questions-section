@@ -34,14 +34,6 @@ const questionSchema = new mongoose.Schema({
 
 const genAnswers = (min = 1, max) => {
   const answers = [];
-=======
-var genAnswers = function (min = 1, max) {
-  var answers = [];
->>>>>>> Stashed changes
-=======
-var genAnswers = function (min = 1, max) {
-  var answers = [];
->>>>>>> Stashed changes
 
   var rnd = Math.floor(Math.random() * (max - min + 1) + min);
   for (let n = 0; n < rnd; n++) {
