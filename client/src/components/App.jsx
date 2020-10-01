@@ -4,7 +4,7 @@ import style from './App.css';
 
 function App() {
   return (
-    <div className={ style.container }>
+    <div className={style.container}>
       <Questions />
     </div>
   );

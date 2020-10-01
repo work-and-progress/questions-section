@@ -7,14 +7,32 @@ import QuestionsList from './QuestionsList/QuestionsList';
 import QuestionsControlBar from './QuestionsControlBar/QuestionsControlBar';
 import style from './Questions.css';
 
-
 class Questions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: []
+      questions: [],
     };
     this.handleAsk = this.handleAsk.bind(this);
+  }
+
+  componentDidMount() {
+    this.getQuestions();
+  }
+
+  getQuestions() {
+    axios({
+      method: 'get',
+      url: 'http://localhost:8080/questions/1',
+    })
+      .then((res) => {
+        this.setState({
+          questions: [...res.data],
+        });
+        console.log('====== Get Questions ======')
+        console.log(this.state.questions);
+      })
+      .catch('Error getting questions');
   }
 
   handleAsk() {
@@ -22,32 +40,14 @@ class Questions extends React.Component {
     this.setState();
   }
 
-  getQuestions() {
-    axios({
-      method: 'get',
-      url: 'http://localhost:8080/questions/1'
-    })
-      .then(res => {
-        this.setState({
-          questions: [...res.data]
-        });
-        // console.log('====== Get Questions ======')
-        // console.log(this.state.questions);
-      })
-      .catch('Error getting questions');
-  }
-
-  componentDidMount() {
-    this.getQuestions();
-  }
-
   render() {
+    const { questions } = this.state;
     return (
-      <div className={ style.container }>
+      <div className={style.container}>
         <QuestionsTab />
         <QuestionsAskBar handleAsk={this.handleAsk} />
         <QuestionsControlBar />
-        <QuestionsList />
+        <QuestionsList questions={questions} />
       </div>
     );
   }

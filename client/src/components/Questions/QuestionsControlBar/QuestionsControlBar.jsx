@@ -2,11 +2,11 @@ import React from 'react';
 import Pulldown from './Pulldown/Pulldown';
 import style from './QuestionsControlBar.css';
 
-function QuestionsControlBar(props) {
+function QuestionsControlBar() {
   return (
-    <div className={ style.controlBar }>
+    <div className={style.controlBar}>
       <div>
-        <span className={ style.label}>Questions</span>
+        <span className={style.label}>1–4 of 4 Questions</span>
       </div>
       <Pulldown />
     </div>
