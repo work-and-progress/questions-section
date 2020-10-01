@@ -9,7 +9,7 @@
     "server-dev": "nodemon server/index.js",
     "seed": "node database/seed.js",
     "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watchAll",
+    "test:watch": "jest --config ./jest.config.json --watchAll",
     "build": "webpack"
   },
   "repository": {
@@ -30,6 +30,7 @@
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.7",
     "nodemon": "^2.0.4",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -49,6 +50,7 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.2",
     "eslint-plugin-react-hooks": "^4.1.2",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.2",
     "react-cli": "^0.3.1",
     "react-test-renderer": "^16.13.1",
@@ -57,8 +59,5 @@
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
-  },
-  "jest": {
-    "setupFilesAfterEnv": ["./client/src/setupTests.js"]
   }
 }

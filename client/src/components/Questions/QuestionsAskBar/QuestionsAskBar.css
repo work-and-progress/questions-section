@@ -1,0 +1,13 @@
+.askBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.label {
+  font-family: futura;
+  font-size: 14px;
+  font-weight: 600;
+  /* padding: 10px; */
+}

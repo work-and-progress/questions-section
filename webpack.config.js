@@ -9,11 +9,29 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          // include: __dirname + '/client/src',
           options: {
             presets: ['@babel/preset-react', '@babel/preset-env'],
           },
         },
       },
+      {
+        test: /\.css$/i,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
+      // {
+      //   test: /\.css$/,
+      //   loader: "style-loader!css-loader?modules=true"
+      // }
     ],
   },
   output: {
@@ -31,3 +49,4 @@ module.exports = {
   },
   resolve: { extensions: ['.js', '.jsx'] },
 };
+
