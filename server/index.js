@@ -18,7 +18,7 @@ app.get('/questions/:id', (req, res) => {
     if (err) {
       res.status(404).send('Error in app.get - getting questions');
     } else {
-      console.log(results);
+      // console.log(results);
       res.status(200).send(results);
     }
   });

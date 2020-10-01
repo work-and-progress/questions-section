@@ -5,9 +5,7 @@ import style from './App.css';
 function App() {
   return (
     <div className={ style.container }>
-      <Questions
-        className={ style.mid }
-      />
+      <Questions />
     </div>
   );
 }
