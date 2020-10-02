@@ -1,8 +1,7 @@
-.question {
+.wrapper {
   font-family: lucida sans;
-  font-size: 12px;
-  font-weight: 400;
-  padding: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 .user {
@@ -17,13 +16,4 @@
   height: 50px;
   font-size: 14px;
   font-weight: 400;
-}
-
-.wrapper {
-  font-family: lucida sans;
-  padding-top: 10px;
-  padding-left: 10px;
-  /* height: 40px; */
-  /* font-size: 14px;
-  font-weight: 400; */
 }

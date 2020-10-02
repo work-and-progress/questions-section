@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Answers from '../Answer/Answer';
 import Button from './Button/Button';
-
 import style from './Question.css';
 
 function Question({ question }) {
@@ -13,7 +12,10 @@ function Question({ question }) {
         <span>{question.user.nickname + ' · x days ago'}</span>
       </div>
 
-      <div className={style.text}>{question.text.toUpperCase()}</div>
+      <div className={style.text}>
+        <span>{question.text.toUpperCase()}</span>
+      </div>
+
       <Button />
       <Answers answer={firstAnswer} />
     </div>
