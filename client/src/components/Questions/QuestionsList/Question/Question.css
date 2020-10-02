@@ -4,6 +4,18 @@
   padding-left: 10px;
 }
 
+.rowContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.colContainer {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 .user {
   font-family: lucida sans;
   font-size: 14px;
@@ -16,4 +28,23 @@
   height: 50px;
   font-size: 14px;
   font-weight: 400;
+}
+
+.answerCountWrapper {
+  width: 100px;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: 5px;
+}
+
+.answerCountData {
+  width: 100px;
+  font-size: 16px;
+  text-align:center;
+}
+
+.answerCountLabel {
+  width: 100px;
+  font-size: 12px;
+  text-align:center;
 }
