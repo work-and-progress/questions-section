@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button/Button';
+
 import style from './Answer.css';
 
 function Answer({ answer }) {
   return (
     <div className={style.answer}>
-
       <div className={style.user}>
         <span>{`${answer.user.nickname} · x days ago`}</span>
       </div>
