@@ -1,0 +1,16 @@
+.button {
+  color: #FFFFFF;
+  background-color: #999999;
+  font: futura;
+  font-size: 13px;
+  font-weight: bold;
+  border-style: none;
+  width: 70px;
+  margin: 0 5px;
+  border-radius: 3px;
+}
+
+.button:hover {
+  color: #FFFFFF;
+  background-color: #ED1923;
+}
