@@ -29,8 +29,8 @@ class Questions extends React.Component {
         this.setState({
           questions: [...res.data],
         });
-        console.log('====== Get Questions ======')
-        console.log(this.state.questions);
+        // console.log('====== Get Questions ======');
+        // console.log(this.state.questions);
       })
       .catch('Error getting questions');
   }

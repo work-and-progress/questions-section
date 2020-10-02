@@ -79,11 +79,18 @@ const genQuestions = (min, max) => {
 const QuestionModel = mongoose.model('question', questionSchema);
 
 // generate multiple questions for 100 products
-for (let product_id = 0; product_id < 100; product_id++) {
+for (let productId = 0; productId < 100; productId += 1) {
+  // const QuestionModel = mongoose.model('question', questionSchema);
 
-  const QuestionModel = mongoose.model('question', questionSchema);
+  QuestionModel.insertMany(genQuestions(productId, 0, 15))
+    .then(() => {
+      console.log('Data written to DB. \nDB Connection Closed.');
+      mongoose.connection.close();
+    })
+    .catch((err) => console.log(err));
+}
 
-  QuestionModel.insertMany(genQuestions(product_id, 0, 15))
+QuestionModel.insertMany(genQuestions(100, 0, 15))
   .then(() => {
     console.log('Data written to DB. \nDB Connection Closed.');
     mongoose.connection.close();

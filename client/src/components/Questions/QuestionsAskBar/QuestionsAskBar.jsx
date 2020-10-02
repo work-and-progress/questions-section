@@ -12,7 +12,6 @@ function QuestionsAskBar({ handleAsk }) {
       </span>
 
       <Button
-        style={{}}
         handleAsk={handleAsk}
       />
 
