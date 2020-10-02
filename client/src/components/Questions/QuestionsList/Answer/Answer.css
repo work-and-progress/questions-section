@@ -1,7 +1,23 @@
-answer {
+.answer {
+  background-color: #CCCCCC;
+  border-radius: 3px;
   font-family: lucida sans;
   font-size: 12px;
-  font-weight: 100;
-  padding: 10px;
-  background-color: hotpink;
+  font-weight: 400;  margin: 10px;
+  padding: 20px;
+}
+
+.text {
+  height: 40px;
+  padding: 10px 0 10px 0;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.user {
+  font-size: 13px;
+  font-weight: 400;
 }
