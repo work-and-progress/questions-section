@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Question from './Question/Question';
-// import style from './QuestionsList.css';
 
 function QuestionsList({ questions }) {
   return (
@@ -14,9 +13,11 @@ function QuestionsList({ questions }) {
 }
 
 QuestionsList.propTypes = {
-  questions: PropTypes.array,
-  question: PropTypes.string,
-  question.date: PropTypes.string,
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.string,
+    }),
+  ),
 };
 
 QuestionsList.defaultProps = {
