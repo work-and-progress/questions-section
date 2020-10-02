@@ -11,9 +11,11 @@ function Answer({ answer }) {
         <span>{`${answer.user.nickname} · x days ago`}</span>
       </div>
 
-      <div className={style.text}>{answer.text}</div>
+      <div className={style.text}>
+        <span>{answer.text}</span>
+      </div>
 
-      <div className={style.buttonBar}>
+      <div>
         <span className={style.label}>Helpful?</span>
         <Button text={`Yes · ${answer.useful.yes}`} handleClick={() => {}} />
         <Button text={`No · ${answer.useful.no}`} handleClick={() => {}} />
@@ -52,9 +54,5 @@ Answer.defaultProps = {
     },
   },
 };
-
-// Answer.defaultProps = {
-//   answer: '',
-// };
 
 export default Answer;

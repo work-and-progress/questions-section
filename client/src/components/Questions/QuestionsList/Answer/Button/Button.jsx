@@ -10,7 +10,6 @@ function Button({ text, handleClick }) {
       className={style.button}
     >
       <span>{text}</span>
-      {/* <span>{text} · {count}</span> */}
     </button>
   );
 }
@@ -19,9 +18,5 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
-
-// Button.defaultProps = {
-//   // count: '',
-// };
 
 export default Button;

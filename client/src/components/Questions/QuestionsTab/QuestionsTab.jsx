@@ -3,7 +3,7 @@ import style from './QuestionsTab.css';
 
 function QuestionsTab() {
   return (
-    <div className={style.tab}>
+    <div className={style.wrapper}>
       <ul className={style.menu}>
         <li className={style.menuItem}>REVIEWS</li>
         <li className={style.menuItemSelected}>QUESTIONS</li>

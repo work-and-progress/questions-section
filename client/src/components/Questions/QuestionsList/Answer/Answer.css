@@ -1,34 +1,23 @@
 .answer {
   background-color: #CCCCCC;
   border-radius: 3px;
-  padding: 10px;
-  margin: 10px;
   font-family: lucida sans;
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 400;  margin: 10px;
+  padding: 20px;
 }
 
 .text {
-  padding-top: 10px;
-  padding-left: 5px;
   height: 40px;
-  /* font-family: lucida sans;
-  font-size: 12px;
-  font-weight: 100; */
+  padding: 10px 0 10px 0;
 }
 
 .label {
+  font-size: 12px;
   font-weight: 600;
-  margin-left: 5px;
-}
-
-.buttonBar {
-  padding: 0;
-  margin: 0;
 }
 
 .user {
-  font-weight: 100;
-  margin-left: 5px;
   font-size: 13px;
+  font-weight: 400;
 }
