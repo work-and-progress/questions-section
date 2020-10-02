@@ -1,9 +1,10 @@
-.tab {
-  font-family: futura;
-  font-size: 14px;
-  font-weight: 400;
+.wrapper {
+  /* font-family: futura; */
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
   letter-spacing: .1rem;
-  width: 100%;
+  margin: 40px 0 0;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
 }
@@ -14,12 +15,11 @@
 }
 
 .menuItem {
-  margin: 0 40px;
-  fontWeight: 100;
+  margin: 0 20px;
+  font-weight: 100;
 }
 
 .menuItemSelected {
-  margin: 0 40px;
-  fontWeight: 600;
+  margin: 0 20px;
+  font-weight: 600;
 }
-
