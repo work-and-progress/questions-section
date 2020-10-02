@@ -14,9 +14,11 @@ function QuestionsList({ questions }) {
 }
 
 QuestionsList.propTypes = {
-  questions: PropTypes.array,
-  question: PropTypes.string,
-  question.date: PropTypes.string,
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.string,
+    }),
+  ),
 };
 
 QuestionsList.defaultProps = {
