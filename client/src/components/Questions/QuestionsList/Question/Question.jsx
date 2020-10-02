@@ -8,12 +8,24 @@ function Question({ question }) {
   const firstAnswer = question.answers[0];
   return (
     <div className={style.wrapper}>
-      <div className={style.user}>
-        <span>{question.user.nickname + ' · x days ago'}</span>
-      </div>
 
-      <div className={style.text}>
-        <span>{question.text.toUpperCase()}</span>
+      <div className={style.rowContainer}>
+
+        <div className={style.colContainer}>
+          <div className={style.user}>
+            <span>{`${question.user.nickname} · x days ago`}</span>
+          </div>
+
+          <div className={style.text}>
+            <span>{question.text.toUpperCase()}</span>
+          </div>
+        </div>
+
+        <div className={style.answerCountWrapper}>
+          <span className={style.answerCountData}>{question.answers.length}</span>
+          <span className={style.answerCountLabel}>answers</span>
+        </div>
+
       </div>
 
       <Button />
