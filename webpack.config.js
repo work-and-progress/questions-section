@@ -28,10 +28,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   test: /\.css$/,
-      //   loader: "style-loader!css-loader?modules=true"
-      // }
     ],
   },
   output: {
@@ -48,5 +44,5 @@ module.exports = {
     },
   },
   resolve: { extensions: ['.js', '.jsx'] },
+  devtool: 'source-map',
 };
-
