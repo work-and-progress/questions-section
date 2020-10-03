@@ -5,6 +5,8 @@ import QuestionsTab from './QuestionsTab/QuestionsTab';
 import QuestionsAskBar from './QuestionsAskBar/QuestionsAskBar';
 import QuestionsList from './QuestionsList/QuestionsList';
 import QuestionsControlBar from './QuestionsControlBar/QuestionsControlBar';
+import QuestionForm from '../QuestionForm/QuestionForm';
+
 import style from './Questions.css';
 
 class Questions extends React.Component {
@@ -29,8 +31,6 @@ class Questions extends React.Component {
         this.setState({
           questions: [...res.data],
         });
-        // console.log('====== Get Questions ======');
-        // console.log(this.state.questions);
       })
       .catch('Error getting questions');
   }
@@ -48,6 +48,9 @@ class Questions extends React.Component {
         <QuestionsAskBar handleAsk={this.handleAsk} />
         <QuestionsControlBar />
         <QuestionsList questions={questions} />
+
+        <QuestionForm />
+
       </div>
     );
   }
