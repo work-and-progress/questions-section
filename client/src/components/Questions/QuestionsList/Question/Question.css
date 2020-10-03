@@ -1,5 +1,5 @@
 .wrapper {
-  font-family: lucida sans;
+  font-family: futura;
   padding-top: 10px;
   padding-left: 10px;
 }
@@ -40,11 +40,11 @@
 .answerCountData {
   width: 100px;
   font-size: 16px;
-  text-align:center;
+  text-align: center;
 }
 
 .answerCountLabel {
   width: 100px;
   font-size: 12px;
-  text-align:center;
+  text-align: center;
 }

@@ -1,4 +1,4 @@
-.askButton {
+.button {
   color: #FFFFFF;
   background-color: #ED1923;
   border-style: none;
@@ -10,4 +10,11 @@
   font-size: 14px;
   font-weight: 600;
   border-radius: 3px;
+  outline: none;
+  transition: all .25s ease;
 }
+
+.button:hover {
+  filter: brightness(90%);
+}
+
