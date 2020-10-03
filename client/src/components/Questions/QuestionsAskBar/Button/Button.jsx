@@ -7,7 +7,7 @@ function Button({ handleAsk }) {
     <button
       type="button"
       onClick={handleAsk}
-      className={style.askButton}
+      className={style.button}
     >
       ASK A QUESTION
     </button>
