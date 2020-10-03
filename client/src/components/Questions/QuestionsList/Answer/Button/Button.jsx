@@ -5,6 +5,7 @@ import style from './Button.css';
 function Button({ text, handleClick }) {
   return (
     <button
+      id="yes"
       type="button"
       onClick={handleClick}
       className={style.button}
