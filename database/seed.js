@@ -36,16 +36,19 @@ const genAnswers = (min = 1, max) => {
   const answers = [];
 
   const rnd = Math.floor(Math.random() * (max - min + 1) + min);
-  for (let n = 0; n < rnd; n++) {
+  for (let n = 0; n < rnd; n += 1) {
     answers.push({
       text: faker.lorem.sentence(),
       date: faker.date.past(),
       user: {
         nickname: faker.internet.userName(),
         email: faker.internet.email(),
-        location: faker.address.city() + ', ' + faker.address.stateAbbr()
+        location: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
       },
-      useful: { yes: faker.random.number({ min: 0, max: 15 }), no: faker.random.number({ min: 0, max: 5 }) }
+      useful: {
+        yes: faker.random.number({ min: 0, max: 15 }),
+        no: faker.random.number({ min: 0, max: 5 }),
+      },
     });
   }
   return answers;
@@ -60,7 +63,7 @@ const genQuestions = (min, max) => {
     for (let i = 0; i < rnd; i += 1) {
       questions.push({
         product_id: productId,
-        text: `${faker.lorem.sentence()} Why so angry?`,
+        text: `${faker.lorem.sentence()}`,
         date: faker.date.past(),
         user: {
           nickname: faker.internet.userName(),
@@ -70,7 +73,6 @@ const genQuestions = (min, max) => {
         answers: genAnswers(0, 15),
       });
     }
-
   }
   return questions;
 };
@@ -95,12 +97,11 @@ QuestionModel.insertMany(genQuestions(100, 0, 15))
     console.log('Data written to DB. \nDB Connection Closed.');
     mongoose.connection.close();
   })
-  .catch((err) => console.log(err))
-}
+  .catch((err) => console.log(err));
 
 QuestionModel.insertMany(genQuestions(100, 0, 15))
-.then(() => {
-  console.log('Data written to DB. \nDB Connection Closed.');
-  mongoose.connection.close();
-})
-.catch((err) => console.log(err))
+  .then(() => {
+    console.log('Data written to DB. \nDB Connection Closed.');
+    mongoose.connection.close();
+  })
+  .catch((err) => console.log(err));

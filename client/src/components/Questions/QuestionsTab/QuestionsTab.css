@@ -1,6 +1,7 @@
 .wrapper {
-  /* font-family: futura; */
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Futura';
+  /* font-family: source-sans-pro, sans-serif; */
+  /* font-family: 'Nunito', sans-serif; */
   font-size: 16px;
   font-weight: 700;
   letter-spacing: .1rem;
@@ -16,10 +17,10 @@
 
 .menuItem {
   margin: 0 20px;
-  font-weight: 100;
+  font-weight: 300;
 }
 
 .menuItemSelected {
   margin: 0 20px;
-  font-weight: 600;
+  font-weight: 700;
 }

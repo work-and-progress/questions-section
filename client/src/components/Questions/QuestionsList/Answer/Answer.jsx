@@ -3,26 +3,61 @@ import PropTypes from 'prop-types';
 import Button from './Button/Button';
 import style from './Answer.css';
 
-function Answer({ answer }) {
-  return (
-    <div className={style.answer}>
+// make yes/no buttons increment count
+//   store counts in local state
+//   implement click handler that updates local state
+//
+//   stretch: update database
 
-      <div className={style.user}>
-        <span>{`${answer.user.nickname} · x days ago`}</span>
-      </div>
+class Answer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      yes: 0,
+      no: 0,
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-      <div className={style.text}>
-        <span>{answer.text}</span>
-      </div>
+  componentDidMount() {
+    const { answer } = this.props;
+    this.setState({
+      yes: answer.useful.yes,
+      no: answer.useful.no,
+    });
+  }
 
-      <div>
-        <span className={style.label}>Helpful?</span>
-        <Button text={`Yes · ${answer.useful.yes}`} handleClick={() => {}} />
-        <Button text={`No · ${answer.useful.no}`} handleClick={() => {}} />
-        <Button text="Report" handleClick={() => {}} />
+  handleClick(e, id) {
+    // this.setState((prevState) => ({ yes: prevState.yes + 1 }));
+    // this.setState((prevState) => ({ no: prevState.no + 1 }));
+    e.preventDefault();
+    this.setState((prevState) => ({ [id]: prevState[id] + 1 }));
+  }
+
+  render() {
+    const { answer } = this.props;
+    const { yes, no } = this.state;
+
+    return (
+      <div className={style.answer}>
+
+        <div className={style.user}>
+          <span>{`${answer.user.nickname} · x days ago`}</span>
+        </div>
+
+        <div className={style.text}>
+          <span>{answer.text}</span>
+        </div>
+
+        <div>
+          <span className={style.label}>Helpful?</span>
+          <Button text={`Yes · ${yes}`} handleClick={(e) => this.handleClick(e, 'yes')} />
+          <Button text={`No · ${no}`} handleClick={(e) => this.handleClick(e, 'no')} />
+          <Button text="Report" handleClick={() => {}} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 Answer.propTypes = {
