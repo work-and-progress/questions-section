@@ -17,7 +17,7 @@ function Question({ question }) {
           </div>
 
           <div className={style.text}>
-            <span>{question.text.toUpperCase()}</span>
+            <span>{question.text}</span>
           </div>
         </div>
 
