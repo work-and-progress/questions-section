@@ -9,7 +9,7 @@
   margin: 0 5px;
   border-radius: 3px;
   outline: none;
-  transition: all .25s ease;
+  transition: all .1s ease;
 }
 
 .button:hover {

@@ -14,8 +14,9 @@ class Questions extends React.Component {
     super(props);
     this.state = {
       questions: [],
+      showAskForm: false,
     };
-    this.handleAsk = this.handleAsk.bind(this);
+    this.toggleAskForm = this.toggleAskForm.bind(this);
   }
 
   componentDidMount() {
@@ -35,22 +36,22 @@ class Questions extends React.Component {
       .catch('Error getting questions');
   }
 
-  handleAsk() {
-    console.log('Clicked Ask!');
-    this.setState();
+  toggleAskForm() {
+    const { showAskForm } = this.state;
+    this.setState({
+      showAskForm: !showAskForm,
+    });
   }
 
   render() {
-    const { questions } = this.state;
+    const { questions, showAskForm } = this.state;
     return (
       <div className={style.container}>
         <QuestionsTab />
-        <QuestionsAskBar handleAsk={this.handleAsk} />
+        <QuestionsAskBar toggleAskForm={this.toggleAskForm} />
         <QuestionsControlBar />
         <QuestionsList questions={questions} />
-
-        <QuestionForm />
-
+        <QuestionForm show={showAskForm} onClose={this.toggleAskForm} />
       </div>
     );
   }
