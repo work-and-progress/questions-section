@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Question from './Question/Question';
 
-function QuestionsList({ questions }) {
+function QuestionsList({ questions, toggleAnswerForm }) {
   return (
     <div>
       {questions.map((question) => (
-        <Question question={question} key={question.date} />
+        <Question
+          question={question}
+          key={question.date}
+          toggleAnswerForm={toggleAnswerForm}
+        />
       ))}
     </div>
   );
@@ -18,6 +22,7 @@ QuestionsList.propTypes = {
       date: PropTypes.string,
     }),
   ),
+  toggleAnswerForm: PropTypes.func.isRequired,
 };
 
 QuestionsList.defaultProps = {
