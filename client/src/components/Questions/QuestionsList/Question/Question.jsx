@@ -4,7 +4,7 @@ import Answers from '../Answer/Answer';
 import Button from './Button/Button';
 import style from './Question.css';
 
-function Question({ question }) {
+function Question({ question, toggleAnswerForm }) {
   const firstAnswer = question.answers[0];
   return (
     <div className={style.wrapper}>
@@ -28,7 +28,7 @@ function Question({ question }) {
 
       </div>
 
-      <Button />
+      <Button handleAsk={toggleAnswerForm} />
       <Answers answer={firstAnswer} />
     </div>
   );
@@ -58,6 +58,7 @@ Question.propTypes = {
       }),
     ),
   }),
+  toggleAnswerForm: PropTypes.func.isRequired,
 };
 
 Question.defaultProps = {

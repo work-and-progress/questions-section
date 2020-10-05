@@ -6,6 +6,7 @@ import QuestionsAskBar from './QuestionsAskBar/QuestionsAskBar';
 import QuestionsList from './QuestionsList/QuestionsList';
 import QuestionsControlBar from './QuestionsControlBar/QuestionsControlBar';
 import QuestionForm from '../QuestionForm/QuestionForm';
+import AnswerForm from '../AnswerForm/AnswerForm';
 
 import style from './Questions.css';
 
@@ -15,7 +16,9 @@ class Questions extends React.Component {
     this.state = {
       questions: [],
       showAskForm: false,
+      showAnswerForm: true,
     };
+    this.toggleAnswerForm = this.toggleAnswerForm.bind(this);
     this.toggleAskForm = this.toggleAskForm.bind(this);
   }
 
@@ -36,6 +39,13 @@ class Questions extends React.Component {
       .catch('Error getting questions');
   }
 
+  toggleAnswerForm() {
+    const { showAnswerForm } = this.state;
+    this.setState({
+      showAnswerForm: !showAnswerForm,
+    });
+  }
+
   toggleAskForm() {
     const { showAskForm } = this.state;
     this.setState({
@@ -44,14 +54,15 @@ class Questions extends React.Component {
   }
 
   render() {
-    const { questions, showAskForm } = this.state;
+    const { questions, showAnswerForm, showAskForm } = this.state;
     return (
       <div className={style.container}>
         <QuestionsTab />
         <QuestionsAskBar toggleAskForm={this.toggleAskForm} />
         <QuestionsControlBar />
-        <QuestionsList questions={questions} />
+        <QuestionsList questions={questions} toggleAnswerForm={this.toggleAnswerForm} />
         <QuestionForm show={showAskForm} onClose={this.toggleAskForm} />
+        <AnswerForm show={showAnswerForm} onClose={this.toggleAnswerForm} />
       </div>
     );
   }

@@ -1,21 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import style from './Button.css';
 
-function Button({ handleAsk }) {
+function Button({ handleAnswer }) {
   return (
     <button
       type="button"
-      onClick={handleAsk}
+      onClick={handleAnswer}
       className={style.button}
     >
-      Answer this Question
+      POST ANSWER
     </button>
   );
 }
 
 Button.propTypes = {
-  handleAsk: PropTypes.func.isRequired,
+  handleAnswer: propTypes.func.isRequired,
 };
 
 export default Button;
