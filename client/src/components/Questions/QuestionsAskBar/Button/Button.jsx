@@ -2,11 +2,11 @@ import React from 'react';
 import propTypes from 'prop-types';
 import style from './Button.css';
 
-function Button({ handleAsk }) {
+function Button({ toggleAskForm }) {
   return (
     <button
       type="button"
-      onClick={handleAsk}
+      onClick={toggleAskForm}
       className={style.button}
     >
       ASK A QUESTION
@@ -15,7 +15,7 @@ function Button({ handleAsk }) {
 }
 
 Button.propTypes = {
-  handleAsk: propTypes.func.isRequired,
+  toggleAskForm: propTypes.func.isRequired,
 };
 
 export default Button;
