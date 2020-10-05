@@ -39,7 +39,7 @@ class QuestionForm extends React.Component {
           <div className={style.right_col}>
 
             {/* HEADER */}
-            <div className={style.row_header}>
+            <div className={style.header_row}>
               <span className={style.header_heading}>
                 Ask a Question
               </span>
