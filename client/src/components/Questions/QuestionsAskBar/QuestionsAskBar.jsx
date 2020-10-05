@@ -4,7 +4,7 @@ import Button from './Button/Button';
 
 import style from './QuestionsAskBar.css';
 
-function QuestionsAskBar({ handleAsk }) {
+function QuestionsAskBar({ toggleAskForm }) {
   return (
     <div className={style.askBar}>
       <span className={style.label}>
@@ -12,7 +12,7 @@ function QuestionsAskBar({ handleAsk }) {
       </span>
 
       <Button
-        handleAsk={handleAsk}
+        toggleAskForm={toggleAskForm}
       />
 
     </div>
@@ -20,7 +20,7 @@ function QuestionsAskBar({ handleAsk }) {
 }
 
 QuestionsAskBar.propTypes = {
-  handleAsk: PropTypes.func.isRequired,
+  toggleAskForm: PropTypes.func.isRequired,
 };
 
 export default QuestionsAskBar;
