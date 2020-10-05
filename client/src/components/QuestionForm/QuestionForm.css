@@ -3,9 +3,12 @@
   flex-flow: row nowrap;
   width: 900px;
   height: 580px;
+
   position: absolute;
-  top: 50px;
-  left: 220px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   background-color: #f7f7f7;
   color: #27221D;
   border: 1px solid #ddd;
@@ -13,6 +16,16 @@
   overflow: hidden;
   font-family: Futura;
   font-size: 12px;
+  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.3));
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(1px) brightness(60%);
 }
 
 /* PHOTO BOX */
@@ -53,9 +66,6 @@
   position: relative;
   padding: 5px;
   height: 110px;
-  border-top-width: .5px;
-  border-top-style: solid;
-  border-top-color: #ddd;
 }
 
 .header_heading {
@@ -74,13 +84,55 @@
   font-weight: 400;
 }
 
+/* .header_closeX {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-family: futura;
+  font-size: 14px;
+  font-weight: 100;
+
+  text-align: center;
+  vertical-align: middle;
+
+  border-radius: 50%;
+  background-color: #767676;
+  color: white;
+  width: 20px;
+  height: 20px;
+  transition: all .1s ease;
+  cursor: pointer;
+} */
+
+/* .header_closeX:hover {
+  background-color: #2d2d2d;
+} */
+
+.header_closeX {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  font-size: 24px;
+  font-weight: 100;
+
+  text-align: center;
+  vertical-align: middle;
+
+  color: #767676;
+  transition: all .1s ease;
+  cursor: pointer;
+}
+
+.header_closeX:hover {
+  color: #2d2d2d;
+}
+
 /* QUESTION */
 
 .question_row {
   position: relative;
   padding: 30px;
   height: 110px;
-
   border-top-width: .5px;
   border-top-style: solid;
   border-top-color: #ddd;
@@ -108,6 +160,8 @@
   border-color: #ddd;
   border-top-color: #bbb;
   border-radius: 5px;
+  resize: none;
+  font-family: Futura;
 }
 
 /* WRAPPER FOR NICKNAME / LOCATION */
@@ -123,7 +177,6 @@
 .name_row {
   position: relative;
   width: 50%;
-
   border-top-width: .5px;
   border-top-style: solid;
   border-top-color: #ddd;
@@ -156,7 +209,6 @@
 .location_row {
   position: relative;
   width: 50%;
-  background-color: #f8f0ce;
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: #ddd;
@@ -189,7 +241,6 @@
 .email_row {
   position: relative;
   height: 110px;
-
   border-top-width: .5px;
   border-top-style: solid;
   border-top-color: #ddd;
@@ -254,4 +305,34 @@ input[type=checkbox] {
   position: absolute;
   left: 30px;
   bottom: 10px;
+}
+
+/* ON FOCUS */
+
+input:focus, textarea:focus {
+  border-color: #b23238;
+}
+
+.email_row:focus-within,
+.question_row:focus-within,
+.name_row:focus-within,
+.location_row:focus-within {
+  background-color: #f8f0ce;
+  color: #b23238;
+}
+
+.arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 32px;
+  color: #444444;
+  visibility: hidden;
+}
+
+.email_row:focus-within > .arrow,
+.question_row:focus-within > .arrow,
+.name_row:focus-within > .arrow,
+.location_row:focus-within > .arrow {
+  visibility: visible;
 }
