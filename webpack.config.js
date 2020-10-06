@@ -9,7 +9,7 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          // include: __dirname + '/client/src',
+          // include: path.join(__dirname, '/client/src'),
           options: {
             presets: ['@babel/preset-react', '@babel/preset-env'],
           },
@@ -36,10 +36,10 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, '/client/dist'),
-    port: 8080,
+    port: 8083,
     proxy: {
       '/': {
-        target: 'http://localhost:3000/',
+        target: 'http://localhost:3003/',
       },
     },
   },

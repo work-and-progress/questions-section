@@ -30,7 +30,7 @@ const questionSchema = new mongoose.Schema({
 const QuestionModel = mongoose.model('questions', questionSchema);
 
 const getAllQuestions = function (id, callback) {
-  return QuestionModel.find({ product_id: id }).limit(25)
+  return QuestionModel.find({ product_id: id }).limit(30)
     .then((questions) => callback(null, questions))
     .catch((err) => callback(err));
 };
