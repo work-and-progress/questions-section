@@ -1,7 +1,7 @@
 const faker = require('faker');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/unzwilling', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.dropDatabase(); // Clear existing database
 
 // SCHEMAs
@@ -27,12 +27,9 @@ const questionSchema = new mongoose.Schema({
   answers: [answerSchema], // subdoc
 });
 
-// let productSchema = new mongoose.Schema({
-//   product_id: String,
-//   user: [questionSchema],
-// })
+// GENERATE FAKE DATA
 
-const genAnswers = (min = 1, max) => {
+const genAnswers = function (min = 1, max) {
   const answers = [];
 
   const rnd = Math.floor(Math.random() * (max - min + 1) + min);
@@ -43,7 +40,7 @@ const genAnswers = (min = 1, max) => {
       user: {
         nickname: faker.internet.userName(),
         email: faker.internet.email(),
-        location: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+        location: `{${faker.address.city()}, ${faker.address.stateAbbr()}`,
       },
       useful: {
         yes: faker.random.number({ min: 0, max: 15 }),
@@ -54,7 +51,7 @@ const genAnswers = (min = 1, max) => {
   return answers;
 };
 
-const genQuestions = (min, max) => {
+const genQuestions = function (min, max) {
   const numProducts = 100;
   const questions = [];
 
@@ -63,7 +60,7 @@ const genQuestions = (min, max) => {
     for (let i = 0; i < rnd; i += 1) {
       questions.push({
         product_id: productId,
-        text: `${faker.lorem.sentence()}`,
+        text: faker.lorem.sentence(),
         date: faker.date.past(),
         user: {
           nickname: faker.internet.userName(),
@@ -77,29 +74,13 @@ const genQuestions = (min, max) => {
   return questions;
 };
 
-// GENERATE QUESTIONS LIST AND ADD ALL TO DB
+// INSERT FAKE DATA INTO DB
+
 const QuestionModel = mongoose.model('question', questionSchema);
 
-// generate multiple questions for 100 products
-for (let productId = 0; productId < 100; productId += 1) {
-  // const QuestionModel = mongoose.model('question', questionSchema);
+const questionList = genQuestions(0, 15);
 
-  QuestionModel.insertMany(genQuestions(productId, 0, 15))
-    .then(() => {
-      console.log('Data written to DB. \nDB Connection Closed.');
-      mongoose.connection.close();
-    })
-    .catch((err) => console.log(err));
-}
-
-QuestionModel.insertMany(genQuestions(100, 0, 15))
-  .then(() => {
-    console.log('Data written to DB. \nDB Connection Closed.');
-    mongoose.connection.close();
-  })
-  .catch((err) => console.log(err));
-
-QuestionModel.insertMany(genQuestions(100, 0, 15))
+QuestionModel.insertMany(questionList)
   .then(() => {
     console.log('Data written to DB. \nDB Connection Closed.');
     mongoose.connection.close();
