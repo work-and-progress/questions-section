@@ -1,12 +1,15 @@
-.controlBar {
+.page_bar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  align-items: center;
+
   background-color:#CCCCCC;
   padding: 10px;
-  margin: 5px;
+  margin-top: 25px;
   border-radius: 3px;
-  font-family: Futura;
+  font-family: 'Futura';
   font-size: 14px;
   font-weight: 100;
 }
@@ -15,5 +18,4 @@
   font-family: Futura;
   font-size: 14px;
   font-weight: 100;
-  /* padding: 10px; */
 }

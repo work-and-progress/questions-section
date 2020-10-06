@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import url from 'url';
 
 import QuestionsTab from './QuestionsTab/QuestionsTab';
 import QuestionsAskBar from './QuestionsAskBar/QuestionsAskBar';
@@ -7,6 +8,7 @@ import QuestionsList from './QuestionsList/QuestionsList';
 import QuestionsControlBar from './QuestionsControlBar/QuestionsControlBar';
 import QuestionForm from '../QuestionForm/QuestionForm';
 import AnswerForm from '../AnswerForm/AnswerForm';
+import QuestionsPageBar from './QuestionsPageBar/QuestionsPageBar';
 
 import style from './Questions.css';
 
@@ -16,20 +18,23 @@ class Questions extends React.Component {
     this.state = {
       questions: [],
       showAskForm: false,
-      showAnswerForm: true,
+      showAnswerForm: false,
     };
     this.toggleAnswerForm = this.toggleAnswerForm.bind(this);
     this.toggleAskForm = this.toggleAskForm.bind(this);
   }
 
   componentDidMount() {
-    this.getQuestions();
+    const { questions } = this.state;
+    if (!Array.isArray(questions) || questions.length === 0) {
+      this.getQuestions('7');
+    }
   }
 
-  getQuestions() {
+  getQuestions(product) {
     axios({
       method: 'get',
-      url: 'http://localhost:8080/questions/1',
+      url: url.resolve('http://localhost:3003/questions/', product),
     })
       .then((res) => {
         this.setState({
@@ -63,6 +68,7 @@ class Questions extends React.Component {
         <QuestionsList questions={questions} toggleAnswerForm={this.toggleAnswerForm} />
         <QuestionForm show={showAskForm} onClose={this.toggleAskForm} />
         <AnswerForm show={showAnswerForm} onClose={this.toggleAnswerForm} />
+        {/* <QuestionsPageBar /> */}
       </div>
     );
   }
