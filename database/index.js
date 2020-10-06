@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/unzwilling', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // SCHEMAs
 
