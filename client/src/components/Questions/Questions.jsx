@@ -34,7 +34,8 @@ class Questions extends React.Component {
   getQuestions(product) {
     axios({
       method: 'get',
-      url: url.resolve('http://localhost:3003/questions/', product),
+      // url: url.resolve('http://localhost:3003/questions/', product),
+      url: url.resolve('/questions/', product),
     })
       .then((res) => {
         this.setState({
