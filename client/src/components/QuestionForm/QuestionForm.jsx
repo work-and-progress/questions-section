@@ -31,7 +31,7 @@ class QuestionForm extends React.Component {
         >
 
           <div className={style.left_col}>
-            <img className={style.product_image} src="media/product_1.jpg" alt="blender" />
+            <img className={style.product_image} src="https://unzwilling-questions.s3-us-west-1.amazonaws.com/product_1.jpg" alt="blender" />
 
             <span className={style.product_label}>unZWILLING -  eFenergy BFB-3000 Blender</span>
           </div>
