@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
 // mongoose.connect('mongodb://host.docker.internal:27017/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
-
-// mongoose.connect('mongodb://database/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
-
-mongoose.connect('mongodb://localhost/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://database/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // SCHEMAs
 
