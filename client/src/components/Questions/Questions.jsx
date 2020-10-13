@@ -29,12 +29,12 @@ class Questions extends React.Component {
     if (!Array.isArray(questions) || questions.length === 0) {
       this.getQuestions('7');
     }
+    document.getElementById('prevButton').disabled = true;
   }
 
   getQuestions(product) {
     axios({
       method: 'get',
-      // url: url.resolve('http://localhost:3003/questions/', product),
       url: url.resolve('/questions/', product),
     })
       .then((res) => {
@@ -69,7 +69,7 @@ class Questions extends React.Component {
         <QuestionsList questions={questions} toggleAnswerForm={this.toggleAnswerForm} />
         <QuestionForm show={showAskForm} onClose={this.toggleAskForm} />
         <AnswerForm show={showAnswerForm} onClose={this.toggleAnswerForm} />
-        {/* <QuestionsPageBar /> */}
+        <QuestionsPageBar />
       </div>
     );
   }
