@@ -4,8 +4,12 @@ import style from './Paginate.css';
 function Paginate() {
   return (
     <div>
-      <button type="button"><i className="fas fa-caret-left" /></button>
-      <button type="button"><i className="fas fa-caret-right" /></button>
+      <button type="button" id="prevButton" className={style.page_button}>
+        <i className="fas fa-caret-left" />
+      </button>
+      <button type="button" id="nextButton" className={style.page_button}>
+        <i className="fas fa-caret-right" />
+      </button>
     </div>
   );
 }
