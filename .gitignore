@@ -1,4 +1,7 @@
-node_modules
+node_modules/
 client/dist/bundle.js
 client/dist/main.bundle.js
 coverage
+*.DS_Store
+.DS_Store
+__mocks__/
