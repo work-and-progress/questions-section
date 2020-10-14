@@ -2,13 +2,10 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 
 // mongoose.connect('mongodb://host.docker.internal:27017/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
-
-mongoose.connect('mongodb://database/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
-
+mongoose.connect('mongodb://localhost/unZwilling-questions', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.dropDatabase(); // Clear existing database
 
 // SCHEMAs
-
 const userSchema = new mongoose.Schema({
   nickname: String,
   email: String,
@@ -31,7 +28,6 @@ const questionSchema = new mongoose.Schema({
 });
 
 // GENERATE FAKE DATA
-
 const genAnswers = function (min = 1, max) {
   const answers = [];
 
@@ -70,7 +66,7 @@ const genQuestions = function (min, max) {
           email: faker.internet.email(),
           location: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
         },
-        answers: genAnswers(0, 15),
+        answers: genAnswers(0, 5),
       });
     }
   }
@@ -78,10 +74,8 @@ const genQuestions = function (min, max) {
 };
 
 // INSERT FAKE DATA INTO DB
-
 const QuestionModel = mongoose.model('question', questionSchema);
-
-const questionList = genQuestions(0, 15);
+const questionList = genQuestions(0, 5);
 
 QuestionModel.insertMany(questionList)
   .then(() => {
