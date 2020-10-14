@@ -7,6 +7,7 @@
 | Read questions and answers for specific product ID | GET | `/api/questions/:productID` |
 | Update an item for specific question ID | PUT | `/api/questions/:questionID` |
 | Delete an item for specific question ID | DELETE | `/api/questions/:questionID`|
+
 <br><br>
 
 
