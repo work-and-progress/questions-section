@@ -27,16 +27,42 @@ const questionSchema = new mongoose.Schema({
   answers: [answerSchema], // subdoc
 });
 
-// QUERIES
+/* ------------------ QUERY FUNCTIONS ------------------ */
 
 const QuestionModel = mongoose.model('questions', questionSchema);
 
-const getAllQuestions = function (id, callback) {
-  return QuestionModel.find({ product_id: id }).limit(30)
+// eslint-disable-next-line max-len
+const getAllQuestionsForOneProduct = (productID, callback) => {
+  console.log('got your fetch request for this ID! ', productID);
+  return QuestionModel.find({ product_id: productID }).limit(30)
     .then((questions) => callback(null, questions))
     .catch((err) => callback(err));
 };
+// response is the inserted document
+const insertOneQuestionForOneProduct = (question, callback) => {
+  console.log('got your question! ', question);
+  return QuestionModel.create(question)
+    .then((response) => callback(null, response))
+    .catch((err) => callback(err));
+};
 
+const updateQuestionForOneProduct = (questionID, updatedQuestion, callback) => {
+  console.log('got your updated question! ', updatedQuestion);
+  return QuestionModel.updateOne({ _id: questionID }, { $set: updatedQuestion })
+    .then((response) => callback(null, response))
+    .catch((err) => callback(err));
+};
+
+const deleteQuestionForOneProduct = (questionID, callback) => {
+  console.log('got your request to delete a question! ', questionID);
+  return QuestionModel.deleteOne({ _id: questionID })
+    .then((response) => callback(null, response))
+    .catch((err) => callback(err));
+};
+/*----------------------------------------------*/
 module.exports = {
-  getAllQuestions,
+  getAllQuestionsForOneProduct,
+  insertOneQuestionForOneProduct,
+  updateQuestionForOneProduct,
+  deleteQuestionForOneProduct,
 };
