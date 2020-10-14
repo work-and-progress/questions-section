@@ -27,16 +27,36 @@ const questionSchema = new mongoose.Schema({
   answers: [answerSchema], // subdoc
 });
 
-// QUERIES
+/* ------------------ QUERY FUNCTIONS ------------------ */
 
 const QuestionModel = mongoose.model('questions', questionSchema);
 
-const getAllQuestions = function (id, callback) {
-  return QuestionModel.find({ product_id: id }).limit(30)
-    .then((questions) => callback(null, questions))
+// eslint-disable-next-line max-len
+const getAllQuestionsForOneProduct = (id, callback) => QuestionModel.find({ product_id: id }).limit(30)
+  .then((questions) => callback(null, questions))
+  .catch((err) => callback(err));
+
+/*
+"response" should be:
+{
+   "acknowledged" : true,
+   "insertedId" : ObjectId("56fc40f9d735c28df206d078")
+}
+*/
+const insertOneQuestionForOneProduct = (question, callback) => {
+  console.log('got your question! ', question);
+  return QuestionModel.create(question)
+    .then((response) => callback(null, response))
     .catch((err) => callback(err));
 };
 
+
+
+
+
+
+/*----------------------------------------------*/
 module.exports = {
-  getAllQuestions,
+  getAllQuestionsForOneProduct,
+  insertOneQuestionForOneProduct,
 };
