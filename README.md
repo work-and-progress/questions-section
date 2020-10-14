@@ -3,10 +3,10 @@
 ## Support CRUD from your API
 | intention | request type | request url |
 | ----------| :----------: | ----------- |
-| create a new item | POST | `/api/questions` |
-| read questions and answers for specific `product_id` | GET | `/api/questions/:id` |
-| update an item | PUT | `/api/questions/:id` |
-| delete an item | DELETE | `/api/questions/:id`|
+| Create a new item | POST | `/api/questions` |
+| Read questions and answers for specific product ID | GET | `/api/questions/:productID` |
+| Update an item for specific question ID | PUT | `/api/questions/:questionID` |
+| Delete an item for specific question ID | DELETE | `/api/questions/:questionID`|
 <br><br>
 
 
@@ -15,67 +15,99 @@
 2. Success Status Code: `201`
 3. Request Body: Expects JSON with following keys
  ```javascript
-  [
-      {
-          "product_id": "5",
-          "text": "What color is this blender?", // the actual question being asked
-          "date": new Date(),
-          "user": {
-              nickname: "karebae",
-              email: "karin@email.com",
-              location: "San Jose, CA"
-          },
-      }
-  ]
+  {
+      product_id: Number,
+      text: String,
+      date: Date,
+      user: {
+          nickname: String,
+          email: String,
+          location: String
+      },
+  }
   ```
-  4. Returns: none
-<img src="design-and-docs/post-proof.png">
+  4. Returns: Posted question
 
 
-## GET question and answers associated with it
-1. Path Parameters: `id`, which refers to `product_id` in returned data
+
+## GET question and answers associated with Product ID
+1. Path Parameters: `productID`, which refers to `product_id` in returned data
 2. Success Status Code: `200`
-3. Request body: none
+3. Request Body: none
 4. Returns:
   ```javascript
   [
       {
-          "_id": "5f86407dc2742f3a689078a3",
-          "product_id": "5", // path variable is associated with this
-          "text": "Nam iste voluptatem at.", // the actual question being asked
-          "date": "2019-12-24T13:46:24.878Z",
-          "user": {
-              "_id": "5f86407dc2742f3a689078a4",
-              "nickname": "Travis_Schmitt67",
-              "email": "Kathlyn_Hessel@hotmail.com",
-              "location": "South Lavadaport, AK"
+          _id: ObjectId(),
+          product_id: Number,
+          text: String,
+          date: Date,
+          user: {
+              _id: ObjectId(),
+              nickname: String,
+              email: String,
+              location: String
           },
-          "answers": [
+          answers: [
               {
-                  "useful": {
-                      "yes": 1,
-                      "no": 0
+                  useful: {
+                      yes: Number,
+                      no: Number
                   },
-                  "_id": "5f86407dc2742f3a689078a5",
-                  "text": "Aspernatur facere dolorem atque enim vel est recusandae in tempora.",
-                  "date": "2020-07-24T23:32:22.976Z",
-                  "user": {
-                      "_id": "5f86407dc2742f3a689078a6",
-                      "nickname": "Uriel93",
-                      "email": "Rozella.Berge88@gmail.com",
-                      "location": "{Strosinbury, AK"
+                  _id: ObjectId(),
+                  text: String,
+                  date: Date,
+                  user: {
+                      _id: ObjectId(),
+                      nickname: String,
+                      email: String,
+                      location: String
                   }
               }
           ],
-          "__v": 0
       }
   ]
   ```
 
-## PUT
+## PUT question given a Question ID
 
-status: 201
+1. Path Parameters: `questionID`, which refers to `_id` in returned data
+2. Success Status Code: `204`
+3. Request Body: Expects JSON with following keys
+ ```javascript
+  {
+      product_id: Number,
+      text: String,
+      date: Date,
+      user: {
+          nickname: String,
+          email: String,
+          location: String
+      },
+  }
+  ```
+4. Returns: 0 or 1
 
-## DELETE
+## DELETE question given a Question ID
+
+1. Path Parameters: `questionID`, which refers to `_id` in database
+2. Success Status Code: `204`
+3. Request Body: None
+4. Returns: 0 or 1
 
 
+<br>
+
+----
+## Proof
+1. POST
+<img src="design-and-docs/post-proof1.png">
+
+2. GET
+<img src="design-and-docs/get-proof.png">
+
+3. PUT
+<img src="design-and-docs/put-proof.png">
+
+4. DELETE
+<img src="design-and-docs/delete-proof.png">
