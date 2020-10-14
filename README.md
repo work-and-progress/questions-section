@@ -29,7 +29,7 @@
   ]
   ```
   4. Returns: none
-
+<img src="design-and-docs/post-proof.png">
 
 
 ## GET question and answers associated with it
@@ -77,3 +77,5 @@
 status: 201
 
 ## DELETE
+
+
