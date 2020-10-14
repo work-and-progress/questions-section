@@ -24,6 +24,7 @@ app.get('/questions/:productID', cors(), (req, res) => {
 });
 
 // Write a question for a specific product. IDs for questions are allocated via _id property
+// Product ID is specified inside the request body
 app.post('/questions', (req, res) => {
   db.insertOneQuestionForOneProduct(req.body, (err, response) => {
     if (err) {
