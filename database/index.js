@@ -32,10 +32,12 @@ const questionSchema = new mongoose.Schema({
 const QuestionModel = mongoose.model('questions', questionSchema);
 
 // eslint-disable-next-line max-len
-const getAllQuestionsForOneProduct = (productID, callback) => QuestionModel.find({ product_id: productID }).limit(30)
-  .then((questions) => callback(null, questions))
-  .catch((err) => callback(err));
-
+const getAllQuestionsForOneProduct = (productID, callback) => {
+  console.log('got your fetch request for this ID! ', productID);
+  return QuestionModel.find({ product_id: productID }).limit(30)
+    .then((questions) => callback(null, questions))
+    .catch((err) => callback(err));
+};
 // response is the inserted document
 const insertOneQuestionForOneProduct = (question, callback) => {
   console.log('got your question! ', question);
@@ -51,10 +53,16 @@ const updateQuestionForOneProduct = (questionID, updatedQuestion, callback) => {
     .catch((err) => callback(err));
 };
 
-
+const deleteQuestionForOneProduct = (questionID, callback) => {
+  console.log('got your request to delete a question! ', questionID);
+  return QuestionModel.deleteOne({ _id: questionID })
+    .then((response) => callback(null, response))
+    .catch((err) => callback(err));
+};
 /*----------------------------------------------*/
 module.exports = {
   getAllQuestionsForOneProduct,
   insertOneQuestionForOneProduct,
   updateQuestionForOneProduct,
+  deleteQuestionForOneProduct,
 };

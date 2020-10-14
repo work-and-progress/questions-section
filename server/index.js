@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /*--------------------------------------*/
-app.get('/questions/:id', cors(), (req, res) => {
-  db.getAllQuestionsForOneProduct(req.params.id, (err, results) => {
+app.get('/questions/:productID', cors(), (req, res) => {
+  db.getAllQuestionsForOneProduct(req.params.productID, (err, results) => {
     if (err) {
       res.status(404).send('Error in app.get - getting questions');
     } else {
@@ -35,7 +35,6 @@ app.post('/questions', (req, res) => {
 });
 
 // upating using the question's _id
-
 app.put('/questions/:questionID', (req, res) => {
   db.updateQuestionForOneProduct(req.params.questionID, req.body, (err, response) => {
     if (err) {
@@ -46,8 +45,15 @@ app.put('/questions/:questionID', (req, res) => {
   });
 });
 
-app.delete('/questions/:id', (req, res) => {
-  res.send('Got a DELETE request');
+// deleting using the question's _id
+app.delete('/questions/:questionID', (req, res) => {
+  db.deleteQuestionForOneProduct(req.params.questionID, (err, response) => {
+    if (err) {
+      res.status(404).send('Error in app.delete - deleting a question for one product');
+    } else {
+      res.status(204).send(response);
+    }
+  });
 });
 
 /*--------------------------------------*/
