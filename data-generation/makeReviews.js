@@ -18,18 +18,24 @@ function writeTenMillionReviews(writer, encoding, callback) {
       const max = 10;
       const min = 1;
 
+      let data = '';
+      let review_id = '';
+      let review_text = '';
+      let review_date = 0;
+
       const randomNumerOfReviews = Math.floor(Math.random() * (max - min + 1) + 1);
       for (let j = 0; j < randomNumerOfReviews; j += 1) {
-        const review_id = faker.random.uuid(); // 1
-        const review_text = faker.lorem.sentence(); // 2
+        review_id = faker.random.uuid(); // 1
+        review_text = faker.lorem.sentence(); // 2
 
         const randomDate = faker.date.past();
         const dateNow = Date.now();
         const diff = new Date(dateNow - randomDate);
 
-        const review_date = diff.getUTCMonth(); // 3
-        const data = `${product_id},${review_id},${review_text},${review_date} months ago\n`;
+        review_date = diff.getUTCMonth(); // 3
       }
+
+      data = `${product_id},${review_id},${review_text},${review_date} months ago\n`;
 
       if (i === 0) {
         writer.write(data, encoding, callback);
@@ -45,6 +51,6 @@ function writeTenMillionReviews(writer, encoding, callback) {
 }
 
 /* -------------------- Invocation ------------------- */
-writeTenMillionReviews(writeReviews, 'utf-8', () => {
-  writeReviews.end();
+writeTenMillionReviews(writeQuestions, 'utf-8', () => {
+  writeQuestions.end();
 });
