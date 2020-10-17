@@ -2,8 +2,10 @@
 const moment = require('moment');
 const { extendMoment } = require('moment-range');
 
+// eslint-disable-next-line no-unused-vars
 const momentRange = extendMoment(moment);
 
+// eslint-disable-next-line no-unused-vars
 function generateRandomDateWithinLastThreeMonths() {
   function generateRandomDate(start, end) {
     const randomDate = new Date(start + Math.random() * (end - start));
@@ -14,6 +16,7 @@ function generateRandomDateWithinLastThreeMonths() {
   const count = -3;
   const rangeOfNowAndThreeMonthsAgo = moment.rangeFromInterval(interval, count);
 
+  // eslint-disable-next-line max-len
   const randomDateWithinLastThreeMonths = generateRandomDate(rangeOfNowAndThreeMonthsAgo.start, rangeOfNowAndThreeMonthsAgo.end);
   const dateNow = new Date();
 
@@ -27,7 +30,7 @@ function generateRandomDateWithinLastThreeMonths() {
     if (differenceInDays === 1) {
       finalDateValue = (`${differenceInDays} day ago`);
     } else if (differenceInDays === 0) {
-      const randomHoursAgo = Math.floor(Math.random() * (24 - 2 + 1) + 2);
+      const randomHoursAgo = Math.floor(Math.random() * (23 - 2 + 1) + 2);
       finalDateValue = (`${randomHoursAgo} hours ago`);
     } else {
       finalDateValue = (`${differenceInDays} days ago`);
@@ -40,4 +43,6 @@ function generateRandomDateWithinLastThreeMonths() {
   return finalDateValue;
 }
 
-console.log(generateRandomDateWithinLastThreeMonths());
+module.exports = {
+  generateRandomDateWithinLastThreeMonths,
+};

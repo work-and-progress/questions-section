@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 const faker = require('faker');
 const fs = require('file-system');
+const generateRandomDate = require('./generateRandomDate.js');
 
 const writeAnswers = fs.createWriteStream('../generatedData/products-questions-answers.csv');
 writeAnswers.write('product_id,question_id,question_text,question_date,answer_id,answer_text,answer_date,answer_helpful_yes,answer_helpful_no\n', 'utf8');
@@ -46,17 +47,10 @@ function writeLotsOfAnswers(writer, encoding, callback) {
         question_text = (faker.lorem.sentence()).slice(0, -1); // 2
         question_text += '?';
 
-        const randomDate = faker.date.past();
-        const dateNow = Date.now();
-        const diff = new Date(dateNow - randomDate);
-
-        question_date = diff.getUTCMonth(); // 3
-
-
-
+        question_date = generateRandomDate.generateRandomDateWithinLastThreeMonths();
 
         const randomNumberOfAnswers = Math.floor(Math.random() * (answer_max - answer_min + 1) + answer_min);
-        //console.log('randomNumberOfAnswers: ', randomNumberOfAnswers)
+        // console.log('randomNumberOfAnswers: ', randomNumberOfAnswers)
         totalCounter += randomNumberOfAnswers;
 
         for (let k = 0; k < randomNumberOfAnswers; k += 1) {
@@ -65,16 +59,12 @@ function writeLotsOfAnswers(writer, encoding, callback) {
           answer_text = (faker.lorem.sentence()).slice(0, -1); // 2
           answer_text += '.';
 
-          const answerRandomDate = faker.date.past();
-          const answerDateNow = Date.now();
-          const answerDiff = new Date(answerDateNow - answerRandomDate);
-
-          answer_date = answerDiff.getUTCMonth(); // 3
+          answer_date = generateRandomDate.generateRandomDateWithinLastThreeMonths();
 
           answer_helpful_yes = Math.floor(Math.random() * (answer_helpful_max - answer_helpful_min + 1) + 1);
           answer_helpful_no = Math.floor(Math.random() * (answer_helpful_max - answer_helpful_min + 1) + 1);
 
-          data = `${product_id},${question_id},${question_text},${question_date} months ago,${answer_id},${answer_text},${answer_date} months ago,${answer_helpful_yes},${answer_helpful_no}\n`;
+          data = `${product_id},${question_id},${question_text},${question_date},${answer_id},${answer_text},${answer_date},${answer_helpful_yes},${answer_helpful_no}\n`;
 
           if (i === 0) {
             writer.write(data, encoding, callback);
