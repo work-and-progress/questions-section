@@ -20,7 +20,7 @@ function writeTenMillionUsers(writer, encoding, callback) {
       email = email.toLowerCase();
       const location = `${faker.address.city()}, ${faker.address.stateAbbr()}`;
 
-      const data = `${user_id},${username},${email},${location}\n`;
+      const data = `${user_id},${username},${email},"${location}"\n`;
 
       if (i === 0) {
         writer.write(data, encoding, callback);
