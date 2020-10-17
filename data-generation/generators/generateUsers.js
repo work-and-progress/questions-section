@@ -14,12 +14,10 @@ function writeTenMillionUsers(writer, encoding, callback) {
       i -= 1;
 
       const user_id = faker.random.uuid();
-      let username = faker.internet.userName();
-      username = username.toLowerCase();
-      let email = faker.internet.email();
-      email = email.toLowerCase();
+      const preModifiedEmail = faker.internet.email();
+      const email = preModifiedEmail.toLowerCase();
+      const username = preModifiedEmail.split('@')[0];
       const location = `${faker.address.city()}, ${faker.address.stateAbbr()}`;
-
       const data = `${user_id},${username},${email},"${location}"\n`;
 
       if (i === 0) {

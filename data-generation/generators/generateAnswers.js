@@ -3,12 +3,13 @@
 const faker = require('faker');
 const fs = require('file-system');
 
-const writeAnswers = fs.createWriteStream('../generatedData/answers.csv');
+const writeAnswers = fs.createWriteStream('../generatedData/products-questions-answers.csv');
 writeAnswers.write('product_id,question_id,question_text,question_date,answer_id,answer_text,answer_date,answer_helpful_yes,answer_helpful_no\n', 'utf8');
 
 function writeLotsOfAnswers(writer, encoding, callback) {
   let i = 10; // how many units do you want? End goal is 10 mill
   let product_id = 0;
+  let totalCounter = 0; // starts with whatever you set i
 
   function write() {
     let ok = true;
@@ -16,10 +17,10 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       i -= 1;
       product_id += 1;
 
-      const question_max = 10;
+      const question_max = 15;
       const question_min = 0;
 
-      const answer_max = 10;
+      const answer_max = 3;
       const answer_min = 0;
 
       let data = '';
@@ -37,8 +38,7 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       let answer_helpful_yes = 0;
       let answer_helpful_no = 0;
 
-      // eslint-disable-next-line max-len
-      const randomNumberOfQuestions = Math.floor(Math.random() * (question_max - question_min + 1) + 1);
+      const randomNumberOfQuestions = Math.floor(Math.random() * (question_max - question_min + 1) + question_min);
 
       for (let j = 0; j < randomNumberOfQuestions; j += 1) {
         // question_id = faker.random.uuid(); // 1
@@ -52,12 +52,15 @@ function writeLotsOfAnswers(writer, encoding, callback) {
 
         question_date = diff.getUTCMonth(); // 3
 
-        const randomNumberOfAnswers = Math.floor(Math.random() * (answer_max - answer_min + 1) + 1);
+        const randomNumberOfAnswers = Math.floor(Math.random() * (answer_max - answer_min + 1) + answer_min);
+        //console.log('randomNumberOfAnswers: ', randomNumberOfAnswers)
+        totalCounter += randomNumberOfAnswers;
+
         for (let k = 0; k < randomNumberOfAnswers; k += 1) {
           // question_id = faker.random.uuid(); // 1
           answer_id = `${question_id}-${k + 1}`;
           answer_text = (faker.lorem.sentence()).slice(0, -1); // 2
-          answer_text += '!';
+          answer_text += '.';
 
           const answerRandomDate = faker.date.past();
           const answerDateNow = Date.now();
@@ -77,10 +80,16 @@ function writeLotsOfAnswers(writer, encoding, callback) {
           }
         }
       } // very unsure about this logic lol
+
+      // console.log('Total number of lines written: ', totalCounter); // the one that works
     } while (i > 0 && ok);
+    // console.log('Total number of lines written: ', totalCounter);
     if (i > 0) {
       writer.once('drain', write);
     }
+    // When the highWaterMark is reached, the write method of createWriteStream will start returning false.
+    console.log('highWaterMark is reached if ok is false. ok is ', ok);
+    console.log('Total number of lines written so far: ', totalCounter);
   }
   write();
 }
