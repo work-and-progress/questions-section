@@ -6,8 +6,7 @@ coverage
 .DS_Store
 __mocks__/
 
-
 data-generation/products.csv
-data-generation/answers.csvs
+data-generation/answers.csv
 data-generation/questions.csv
 data-generation/users.csv
