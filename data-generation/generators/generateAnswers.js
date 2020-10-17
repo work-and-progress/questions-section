@@ -52,6 +52,9 @@ function writeLotsOfAnswers(writer, encoding, callback) {
 
         question_date = diff.getUTCMonth(); // 3
 
+
+
+
         const randomNumberOfAnswers = Math.floor(Math.random() * (answer_max - answer_min + 1) + answer_min);
         //console.log('randomNumberOfAnswers: ', randomNumberOfAnswers)
         totalCounter += randomNumberOfAnswers;
