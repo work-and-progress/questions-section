@@ -18,10 +18,10 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       i -= 1;
       product_id += 1;
 
-      const question_max = 15;
+      const question_max = 10; // 10 questions maximum per product
       const question_min = 0;
 
-      const answer_max = 3;
+      const answer_max = 3; // 3 answers maximum per question
       const answer_min = 0;
 
       let data = '';
@@ -72,17 +72,18 @@ function writeLotsOfAnswers(writer, encoding, callback) {
             ok = writer.write(data, encoding);
           }
         }
-      } // very unsure about this logic lol
+      }
 
-      // console.log('Total number of lines written: ', totalCounter); // the one that works
+      // console.log('Total number of lines written: ', totalCounter); // also works
     } while (i > 0 && ok);
-    // console.log('Total number of lines written: ', totalCounter);
+
+    // When the highWaterMark is reached, the write method of createWriteStream will start returning false.
+    console.log('highWaterMark is reached if "ok" is FALSE. ok is ', ok);
+    console.log('Total number of lines written so far: ', totalCounter);
+
     if (i > 0) {
       writer.once('drain', write);
     }
-    // When the highWaterMark is reached, the write method of createWriteStream will start returning false.
-    console.log('highWaterMark is reached if ok is false. ok is ', ok);
-    console.log('Total number of lines written so far: ', totalCounter);
   }
   write();
 }
