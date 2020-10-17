@@ -2,10 +2,10 @@
 
 const fs = require('file-system');
 
-const writeUsers = fs.createWriteStream('csv/users.csv');
-writeUsers.write('product_id\n', 'utf8');
+const writeProducts = fs.createWriteStream('../products.csv');
+writeProducts.write('product_id\n', 'utf8');
 
-function writeTenMillionUsers(writer, encoding, callback) {
+function writeTenMillionProducts(writer, encoding, callback) {
   let i = 100; // how many units do you want? End goal is 10 mill
   let product_id = 0;
 
@@ -30,6 +30,6 @@ function writeTenMillionUsers(writer, encoding, callback) {
 }
 
 /* -------------------- Invocation ------------------- */
-writeTenMillionUsers(writeUsers, 'utf-8', () => {
-  writeUsers.end();
+writeTenMillionProducts(writeProducts, 'utf-8', () => {
+  writeProducts.end();
 });
