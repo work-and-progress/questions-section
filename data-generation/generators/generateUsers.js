@@ -2,7 +2,7 @@
 const faker = require('faker');
 const fs = require('file-system');
 
-const writeUsers = fs.createWriteStream('../users.csv');
+const writeUsers = fs.createWriteStream('../generatedData/users.csv');
 writeUsers.write('user_id,username,email,location\n', 'utf8');
 
 function writeTenMillionUsers(writer, encoding, callback) {
