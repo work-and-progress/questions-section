@@ -4,7 +4,7 @@ const faker = require('faker');
 const fs = require('file-system');
 
 const writeAnswers = fs.createWriteStream('../answers.csv');
-writeAnswers.write('product_id,question_id,question_text,question_date\n', 'utf8');
+writeAnswers.write('product_id,question_id,question_text,question_date,answer_id,answer_text,answer_date,answer_helpful_yes,answer_helpful_no\n', 'utf8');
 
 function writeLotsOfAnswers(writer, encoding, callback) {
   let i = 10; // how many units do you want? End goal is 10 mill
@@ -57,7 +57,7 @@ function writeLotsOfAnswers(writer, encoding, callback) {
           // question_id = faker.random.uuid(); // 1
           answer_id = `${question_id}-${k + 1}`;
           answer_text = (faker.lorem.sentence()).slice(0, -1); // 2
-          answer_text += '?';
+          answer_text += '!';
 
           const answerRandomDate = faker.date.past();
           const answerDateNow = Date.now();
@@ -75,11 +75,6 @@ function writeLotsOfAnswers(writer, encoding, callback) {
           } else {
             ok = writer.write(data, encoding);
           }
-        }
-        if (i === 0) {
-          writer.write(data, encoding, callback);
-        } else {
-          ok = writer.write(data, encoding);
         }
       } // very unsure about this logic lol
     } while (i > 0 && ok);
