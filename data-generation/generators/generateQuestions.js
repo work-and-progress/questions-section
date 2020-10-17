@@ -2,7 +2,7 @@
 const faker = require('faker');
 const fs = require('file-system');
 
-const writeQuestions = fs.createWriteStream('../questions.csv');
+const writeQuestions = fs.createWriteStream('../generatedData/questions.csv');
 writeQuestions.write('product_id,question_id,question_text,question_date\n', 'utf8');
 
 function writeLotsOfQuestions(writer, encoding, callback) {

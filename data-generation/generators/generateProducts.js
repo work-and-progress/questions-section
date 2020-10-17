@@ -2,7 +2,7 @@
 
 const fs = require('file-system');
 
-const writeProducts = fs.createWriteStream('../products.csv');
+const writeProducts = fs.createWriteStream('../generatedData/products.csv');
 writeProducts.write('product_id\n', 'utf8');
 
 function writeTenMillionProducts(writer, encoding, callback) {
