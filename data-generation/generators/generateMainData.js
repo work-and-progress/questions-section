@@ -8,7 +8,7 @@ const writeAnswers = fs.createWriteStream('../generatedData/products-questions-a
 writeAnswers.write('product_id,question_id,question_text,question_date,answer_id,answer_text,answer_date,answer_helpful_yes,answer_helpful_no\n', 'utf8');
 
 function writeLotsOfAnswers(writer, encoding, callback) {
-  let i = 100; // amount of total products - 10,000,000 is end goal
+  // let i = 10000000; // amount of total products - 10,000,000 is end goal
   let product_id = 0;
   let totalCounter = 0; // starts with whatever you set i
 
@@ -84,7 +84,7 @@ function writeLotsOfAnswers(writer, encoding, callback) {
     } while (i > 0 && ok);
 
     // When the highWaterMark is reached, the write method of createWriteStream will start returning false.
-    console.log('highWaterMark is reached if "ok" is FALSE. ok is ', ok);
+    // console.log('highWaterMark is reached if "ok" is FALSE. ok is ', ok);
     console.log('Total number of lines written so far: ', totalCounter);
 
     // had to stop early!
