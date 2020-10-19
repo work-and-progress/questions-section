@@ -1,16 +1,19 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
 const faker = require('faker');
 const fs = require('file-system');
 const generateRandomDate = require('./generateRandomDate.js');
 
-const writeAnswers = fs.createWriteStream('../generatedData/products-questions-answers.csv');
-writeAnswers.write('product_id,question_id,question_text,question_date,answer_id,answer_text,answer_date,answer_helpful_yes,answer_helpful_no\n', 'utf8');
+// const writeAnswers = fs.createWriteStream('../generatedData/products-questions-answers.csv');
+const writeAnswers = fs.createWriteStream('../generatedData/test_run.csv');
+writeAnswers.write('product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_user_username,question_user_location,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_user_username,answer_user_location,answer_helpful_yes,answer_helpful_no\n', 'utf8');
 
 function writeLotsOfAnswers(writer, encoding, callback) {
-  // let i = 10000000; // amount of total products - 10,000,000 is end goal
+  // let i = 10000000; // amount of total products
+  let i = 10; // amount of total products
   let product_id = 0;
-  let totalCounter = 0; // starts with whatever you set i
+  // let totalCounter = 0; // starts with whatever you set i
 
   function write() {
     let ok = true;
@@ -30,9 +33,20 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       let question_text = '';
       let question_date = 0;
 
+      let question_user_id = '';
+      let question_user_email = '';
+      let question_user_username = '';
+      let question_user_location = '';
+
       let answer_id = '';
       let answer_text = '';
       let answer_date = 0;
+
+      let answer_user_id = '';
+      let answer_user_email = '';
+      let answer_user_username = '';
+      let answer_user_location = '';
+
 
       const answer_helpful_max = 10;
       const answer_helpful_min = 0;
@@ -50,8 +64,13 @@ function writeLotsOfAnswers(writer, encoding, callback) {
         question_id = `${product_id}-${j + 1}`;
         question_text = (faker.lorem.sentence()).slice(0, -1); // 2
         question_text += '?';
-
         question_date = generateRandomDate.generateRandomDateWithinLastThreeMonths();
+
+        question_user_id = faker.random.uuid();
+        const preModifiedQuestionUserEmail = faker.internet.email();
+        question_user_email = preModifiedQuestionUserEmail.toLowerCase();
+        question_user_username = preModifiedQuestionUserEmail.split('@')[0];
+        question_user_location = `${faker.address.city()}, ${faker.address.stateAbbr()}`;
 
         const randomNumberOfAnswers = Math.floor(Math.random() * (answer_max - answer_min + 1) + answer_min);
         if (randomNumberOfAnswers === 0) {
@@ -63,13 +82,18 @@ function writeLotsOfAnswers(writer, encoding, callback) {
           answer_id = `${question_id}-${k + 1}`;
           answer_text = (faker.lorem.sentence()).slice(0, -1); // 2
           answer_text += '.';
-
           answer_date = generateRandomDate.generateRandomDateWithinLastThreeMonths();
+
+          answer_user_id = faker.random.uuid();
+          const preModifiedAnswerUserEmail = faker.internet.email();
+          answer_user_email = preModifiedAnswerUserEmail.toLowerCase();
+          answer_user_username = preModifiedAnswerUserEmail.split('@')[0];
+          answer_user_location = `${faker.address.city()}, ${faker.address.stateAbbr()}`;
 
           answer_helpful_yes = Math.floor(Math.random() * (answer_helpful_max - answer_helpful_min + 1) + 1);
           answer_helpful_no = Math.floor(Math.random() * (answer_helpful_max - answer_helpful_min + 1) + 1);
 
-          data = `${product_id},${question_id},${question_text},${question_date},${answer_id},${answer_text},${answer_date},${answer_helpful_yes},${answer_helpful_no}\n`;
+          data = `${product_id},${question_id},${question_text},${question_date},${question_user_id},${question_user_email},${question_user_username},"${question_user_location}",${answer_id},${answer_text},${answer_date},${answer_user_id},${answer_user_email},${answer_user_username},"${answer_user_location}",${answer_helpful_yes},${answer_helpful_no}\n`;
 
           if (i === 0) {
             writer.write(data, encoding, callback);
@@ -79,13 +103,13 @@ function writeLotsOfAnswers(writer, encoding, callback) {
             ok = writer.write(data, encoding);
           }
         }
-        totalCounter += randomNumberOfAnswers;
+        // totalCounter += randomNumberOfAnswers;
       }
     } while (i > 0 && ok);
 
     // When the highWaterMark is reached, the write method of createWriteStream will start returning false.
     // console.log('highWaterMark is reached if "ok" is FALSE. ok is ', ok);
-    console.log('Total number of lines written so far: ', totalCounter);
+    // console.log('Total number of lines written so far: ', totalCounter);
 
     // had to stop early!
     // write some more once it drains
