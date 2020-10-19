@@ -74,7 +74,7 @@ function writeLotsOfAnswers(writer, encoding, callback) {
 
         const randomNumberOfAnswers = Math.floor(Math.random() * (answer_max - answer_min + 1) + answer_min);
         if (randomNumberOfAnswers === 0) {
-          data = `${product_id},${question_id},${question_text},${question_date}\n`;
+          data = `${product_id},${question_id},${question_text},${question_date},${question_user_id},${question_user_email},${question_user_username},"${question_user_location}"\n`;
           writer.write(data, encoding);
         }
 
