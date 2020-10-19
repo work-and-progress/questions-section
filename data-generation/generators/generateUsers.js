@@ -6,7 +6,7 @@ const writeUsers = fs.createWriteStream('../generatedData/users.csv');
 writeUsers.write('user_id,username,email,location\n', 'utf8');
 
 function writeTenMillionUsers(writer, encoding, callback) {
-  let i = 100; // how many units do you want? End goal is 10 mill
+  // let i = 5000000; // how many units do you want? End goal is 10 mill
 
   function write() {
     let ok = true;
