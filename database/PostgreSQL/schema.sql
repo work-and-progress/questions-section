@@ -28,3 +28,9 @@ CREATE TABLE [IF NOT EXISTS] users (
   email TEXT,
   location TEXT,
 );
+
+-- example
+COPY persons(first_name, last_name, dob, email)
+FROM 'C:\sampledb\persons.csv'
+DELIMITER ','
+CSV HEADER;
