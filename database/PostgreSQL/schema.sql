@@ -1,15 +1,21 @@
+-- useful commands
 psql -h localhost
 \list -- to show dbs
 DROP DATABASE IF EXISTS unzwilling;
 CREATE DATABASE unzwilling;
 \c unzwilling; -- to switch into unzwilling from karinaizawa, not USE unzwilling;
 \dt -- to show tables
+\! clear -- to clear screen
 
+-- in case you mess up
 DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS answers;
+DROP TABLE IF EXISTS temporary_table;
 
+------------------------------------------------------------------------
 CREATE TABLE if not exists questions (
   question_id varchar PRIMARY KEY, --uuid
-  product_id SERIAL,
+  product_id integer,
   question_text varchar (150),
   question_date DATE,
   question_user_id uuid, --uuid
@@ -20,8 +26,8 @@ CREATE TABLE if not exists questions (
 
 CREATE TABLE if not exists answers (
   answer_id varchar PRIMARY KEY, --uuid
-  product_id SERIAL,
-  question_id uuid,
+  product_id integer, -- type serial or type integer? idk
+  question_id varchar,
   answer_text varchar (150),
   answer_date DATE,
   answer_user_id uuid, --uuid
@@ -32,17 +38,12 @@ CREATE TABLE if not exists answers (
   answer_helpful_no integer
 )
 
-------------------------------------------------------------------------
--- create a temporary table with all the data
--- https://stackoverflow.com/a/12619903/14330883
-
-DROP TABLE IF EXISTS temporary_table;
-
---create temporary table temporary_table (
-create table temporary_table (
-  answer_id uuid PRIMARY KEY, --uuid
-  product_id SERIAL,
-  question_id uuid, --uuid
+-- create a temporary table with all the data https://stackoverflow.com/a/12619903/14330883
+-- create table temporary_table (
+create temporary table temporary_table (
+  answer_id varchar PRIMARY KEY, --uuid
+  question_id varchar, --uuid
+  product_id integer,
   question_text varchar (150),
   question_date DATE,
   question_user_id uuid, --uuid
@@ -59,16 +60,25 @@ create table temporary_table (
   answer_helpful_no integer
 );
 
+------------------------------------------------------------------------
 -- copy the entire csv to this temporary table
 copy temporary_table(product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no)
 from '/Users/karinaizawa/Desktop/questions-section/data-generation/generatedData/100-tester.csv'
 DELIMITER ','
 CSV HEADER;
 
--- need to delete the duplicate questions .. not sure if this will work
--- https://stackoverflow.com/a/12963112/14330883 this is the one that is displayed
--- https://stackoverflow.com/a/46775289/14330883
+-- FIRST, insert into answers table the relevant information
+-- insert into answers table from temporary table
+insert into answers(answer_id,product_id,question_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no)
+select answer_id,product_id,question_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no
+from temporary_table
 
+
+-- NEXT,  we must make some adjustments to the temporary table so for the questions table.
+-- we have to delete the duplicate question_ids bc question_id is a primary key
+
+-- need to delete the duplicate questions
+-- https://stackoverflow.com/a/12963112/14330883 this is the one that is used here, https://stackoverflow.com/a/46775289/14330883 another alternative that was explored
 DELETE FROM temporary_table a USING (
   SELECT MIN(ctid) as ctid, question_id
     FROM temporary_table
@@ -77,19 +87,23 @@ DELETE FROM temporary_table a USING (
 WHERE a.question_id = b.question_id
 AND a.ctid <> b.ctid
 
--- insert into questions table
+-- FINALLY, insert into questions table from temporary table
 insert into questions(product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location)
 select product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location
 from temporary_table
 
+-- delete the temporary table because it's useless now
+DROP TABLE IF EXISTS temporary_table;
 
--- example
-COPY questions(product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location)
-FROM '/Users/karinaizawa/Desktop/questions-section/data-generation/generatedData/100-tester.csv'
-DELIMITER ','
-CSV HEADER;
 
-COPY answers(product_id,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no)
-FROM './data-generation/generatedData/100-tester.csv'
-DELIMITER ','
-CSV HEADER;
+-------------------------------------------------------------------------
+-- DOES NOT WORK
+-- COPY questions(product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location)
+-- FROM '/Users/karinaizawa/Desktop/questions-section/data-generation/generatedData/100-tester.csv'
+-- DELIMITER ','
+-- CSV HEADER;
+
+-- COPY answers(product_id,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no)
+-- FROM '/Users/karinaizawa/Desktop/questions-section/data-generation/generatedData/100-tester.csv'
+-- DELIMITER ','
+-- CSV HEADER
