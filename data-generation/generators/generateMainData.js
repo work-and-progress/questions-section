@@ -5,15 +5,15 @@ const faker = require('faker');
 const fs = require('file-system');
 const generateRandomDate = require('./generateRandomDate.js');
 
-// const writeAnswers = fs.createWriteStream('../generatedData/products-questions-answers.csv');
+// const writeAnswers = fs.createWriteStream('../generatedData/main.csv');
 const writeAnswers = fs.createWriteStream('../generatedData/test_run.csv');
-writeAnswers.write('product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_user_username,question_user_location,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_user_username,answer_user_location,answer_helpful_yes,answer_helpful_no\n', 'utf8');
+writeAnswers.write('product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no\n', 'utf8');
 
 function writeLotsOfAnswers(writer, encoding, callback) {
   // let i = 10000000; // amount of total products
-  let i = 10; // amount of total products
+  let i = 100; // TEST
   let product_id = 0;
-  // let totalCounter = 0; // starts with whatever you set i
+  let totalCounter = 0; // starts with whatever you set i
 
   function write() {
     let ok = true;
@@ -22,11 +22,11 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       product_id += 1;
       // console.log('product_id', product_id);
 
-      const answer_max = 3; // 3 answers maximum per question
-      const answer_min = 0;
+      const answer_max = 2; // 3 answers maximum per question
+      const answer_min = 1;
 
-      const question_max = 10; // 10 questions maximum per product
-      const question_min = 0;
+      const question_max = 4; // 10 questions maximum per product
+      const question_min = 1;
 
       let data = '';
       let question_id = '';
@@ -46,7 +46,6 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       let answer_user_email = '';
       let answer_user_username = '';
       let answer_user_location = '';
-
 
       const answer_helpful_max = 10;
       const answer_helpful_min = 0;
@@ -103,13 +102,13 @@ function writeLotsOfAnswers(writer, encoding, callback) {
             ok = writer.write(data, encoding);
           }
         }
-        // totalCounter += randomNumberOfAnswers;
+        totalCounter += randomNumberOfAnswers;
       }
     } while (i > 0 && ok);
 
     // When the highWaterMark is reached, the write method of createWriteStream will start returning false.
     // console.log('highWaterMark is reached if "ok" is FALSE. ok is ', ok);
-    // console.log('Total number of lines written so far: ', totalCounter);
+    console.log('Total number of lines written so far: ', totalCounter);
 
     // had to stop early!
     // write some more once it drains
