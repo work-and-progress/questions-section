@@ -6,12 +6,12 @@ const fs = require('file-system');
 const generateRandomDate = require('./generateRandomDate.js');
 
 // const writeAnswers = fs.createWriteStream('../generatedData/main.csv');
-const writeAnswers = fs.createWriteStream('../generatedData/test_run.csv');
+const writeAnswers = fs.createWriteStream('../generatedData/mismatched-length-short.csv');
 writeAnswers.write('product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no\n', 'utf8');
 
 function writeLotsOfAnswers(writer, encoding, callback) {
   // let i = 10000000; // amount of total products
-  let i = 100; // TEST
+  let i = 3; // TEST
   let product_id = 0;
   let totalCounter = 0; // starts with whatever you set i
 
@@ -23,10 +23,10 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       // console.log('product_id', product_id);
 
       const answer_max = 2; // 3 answers maximum per question
-      const answer_min = 1;
+      const answer_min = 0;
 
       const question_max = 4; // 10 questions maximum per product
-      const question_min = 1;
+      const question_min = 0;
 
       let data = '';
       let question_id = '';
