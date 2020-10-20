@@ -95,6 +95,23 @@ from temporary_table
 -- delete the temporary table because it's useless now
 DROP TABLE IF EXISTS temporary_table;
 
+-------------------------------------------------------------------------
+-- inner join
+SELECT
+	  questions.question_id,
+		questions.product_id,
+		questions.question_text,
+		questions.question_date,
+		questions.question_username,
+		answers.answer_id,
+		answers.answer_text,
+		answers.answer_date,
+		answers.answer_username,
+		answers.answer_helpful_yes,
+		answers.answer_helpful_no
+FROM questions
+INNER JOIN answers ON questions.question_id = answers.question_id
+-- WHERE questions.product_id = 1;
 
 -------------------------------------------------------------------------
 -- DOES NOT WORK
