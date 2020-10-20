@@ -60,8 +60,8 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       }
 
       for (let j = 0; j < randomNumberOfQuestions; j += 1) {
-        // question_id = `${product_id}-${j + 1}`;
-        question_id = faker.random.uuid();
+        question_id = `${product_id}-${j + 1}`;
+        // question_id = faker.random.uuid();
 
         question_text = (faker.lorem.sentence()).slice(0, -1); // 2
         question_text += '?';
@@ -80,8 +80,8 @@ function writeLotsOfAnswers(writer, encoding, callback) {
         }
 
         for (let k = 0; k < randomNumberOfAnswers; k += 1) {
-          // answer_id = `${question_id}-${k + 1}`;
-          answer_id = faker.random.uuid();
+          answer_id = `${question_id}-${k + 1}`;
+          // answer_id = faker.random.uuid();
 
           answer_text = (faker.lorem.sentence()).slice(0, -1); // 2
           answer_text += '.';
