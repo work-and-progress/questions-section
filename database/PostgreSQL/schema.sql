@@ -75,9 +75,7 @@ from temporary_table
 
 
 -- NEXT,  we must make some adjustments to the temporary table so for the questions table.
--- we have to delete the duplicate question_ids bc question_id is a primary key
-
--- need to delete the duplicate questions
+-- we have to delete the duplicate question_ids bc question_id is a primary keyxw
 -- https://stackoverflow.com/a/12963112/14330883 this is the one that is used here, https://stackoverflow.com/a/46775289/14330883 another alternative that was explored
 DELETE FROM temporary_table a USING (
   SELECT MIN(ctid) as ctid, question_id
@@ -98,29 +96,17 @@ DROP TABLE IF EXISTS temporary_table;
 -------------------------------------------------------------------------
 -- inner join
 SELECT
-	  questions.question_id,
-		questions.product_id,
-		questions.question_text,
-		questions.question_date,
-		questions.question_username,
-		answers.answer_id,
-		answers.answer_text,
-		answers.answer_date,
-		answers.answer_username,
-		answers.answer_helpful_yes,
-		answers.answer_helpful_no
+  questions.question_id,
+	questions.product_id,
+	questions.question_text,
+	questions.question_date,
+	questions.question_username,
+	answers.answer_id,
+	answers.answer_text,
+	answers.answer_date,
+	answers.answer_username,
+	answers.answer_helpful_yes,
+	answers.answer_helpful_no
 FROM questions
 INNER JOIN answers ON questions.question_id = answers.question_id
--- WHERE questions.product_id = 1;
-
--------------------------------------------------------------------------
--- DOES NOT WORK
--- COPY questions(product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location)
--- FROM '/Users/karinaizawa/Desktop/questions-section/data-generation/generatedData/100-tester.csv'
--- DELIMITER ','
--- CSV HEADER;
-
--- COPY answers(product_id,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no)
--- FROM '/Users/karinaizawa/Desktop/questions-section/data-generation/generatedData/100-tester.csv'
--- DELIMITER ','
--- CSV HEADER
+WHERE questions.product_id = 1;

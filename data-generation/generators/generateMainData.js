@@ -54,10 +54,12 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       let answer_helpful_no = 0;
 
       const randomNumberOfQuestions = Math.floor(Math.random() * (question_max - question_min + 1) + question_min);
-      if (randomNumberOfQuestions === 0) {
-        data = `${product_id}\n`;
-        writer.write(data, encoding);
-      }
+
+      // don't insert product id if there are no questions
+      // if (randomNumberOfQuestions === 0) {
+      //   data = `${product_id}\n`;
+      //   writer.write(data, encoding);
+      // }
 
       for (let j = 0; j < randomNumberOfQuestions; j += 1) {
         question_id = `${product_id}-${j + 1}`;
