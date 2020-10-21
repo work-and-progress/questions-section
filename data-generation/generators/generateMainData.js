@@ -6,12 +6,12 @@ const fs = require('file-system');
 const generateRandomDate = require('./generateRandomDate.js');
 
 // const writeAnswers = fs.createWriteStream('../generatedData/main.csv');
-const writeAnswers = fs.createWriteStream('../generatedData/100-tester.csv');
+const writeAnswers = fs.createWriteStream('../generatedData/smaller.csv');
 writeAnswers.write('product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no\n', 'utf8');
 
 function writeLotsOfAnswers(writer, encoding, callback) {
-  // let i = 10000000; // amount of total products
-  let i = 100; // TEST
+  let i = 10; // amount of total products
+  // let i = 10; // TEST
   let product_id = 0;
   let totalCounter = 0; // starts with whatever you set i
 
@@ -62,8 +62,8 @@ function writeLotsOfAnswers(writer, encoding, callback) {
       // }
 
       for (let j = 0; j < randomNumberOfQuestions; j += 1) {
-        question_id = `${product_id}-${j + 1}`;
-        // question_id = faker.random.uuid();
+        // question_id = `${product_id}-${j + 1}`;
+        question_id = faker.random.uuid();
 
         question_text = (faker.lorem.sentence()).slice(0, -1); // 2
         question_text += '?';
@@ -82,8 +82,8 @@ function writeLotsOfAnswers(writer, encoding, callback) {
         }
 
         for (let k = 0; k < randomNumberOfAnswers; k += 1) {
-          answer_id = `${question_id}-${k + 1}`;
-          // answer_id = faker.random.uuid();
+          // answer_id = `${question_id}-${k + 1}`;
+          answer_id = faker.random.uuid();
 
           answer_text = (faker.lorem.sentence()).slice(0, -1); // 2
           answer_text += '.';
@@ -114,7 +114,7 @@ function writeLotsOfAnswers(writer, encoding, callback) {
 
     // When the highWaterMark is reached, the write method of createWriteStream will start returning false.
     // console.log('highWaterMark is reached if "ok" is FALSE. ok is ', ok);
-    console.log('Total number of lines written so far: ', totalCounter);
+    console.log(totalCounter);
 
     // had to stop early!
     // write some more once it drains

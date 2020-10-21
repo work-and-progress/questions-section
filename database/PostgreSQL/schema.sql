@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS temporary_table;
 
 ------------------------------------------------------------------------
 CREATE TABLE if not exists questions (
-  question_id varchar PRIMARY KEY, --uuid
+  question_id uuid PRIMARY KEY, --uuid
   product_id integer,
   question_text varchar (150),
   question_date DATE,
@@ -25,9 +25,9 @@ CREATE TABLE if not exists questions (
 )
 
 CREATE TABLE if not exists answers (
-  answer_id varchar PRIMARY KEY, --uuid
+  answer_id uuid PRIMARY KEY, --uuid
   product_id integer, -- type serial or type integer? idk
-  question_id varchar,
+  question_id uuid,
   answer_text varchar (150),
   answer_date DATE,
   answer_user_id uuid, --uuid
@@ -41,8 +41,8 @@ CREATE TABLE if not exists answers (
 -- create a temporary table with all the data https://stackoverflow.com/a/12619903/14330883
 -- create table temporary_table (
 create temporary table temporary_table (
-  answer_id varchar PRIMARY KEY, --uuid
-  question_id varchar, --uuid
+  answer_id uuid PRIMARY KEY, --uuid
+  question_id uuid, --uuid
   product_id integer,
   question_text varchar (150),
   question_date DATE,
