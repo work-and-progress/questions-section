@@ -63,7 +63,7 @@ create temporary table temporary_table (
 ------------------------------------------------------------------------
 -- copy the entire csv to this temporary table
 copy temporary_table(product_id,question_id,question_text,question_date,question_user_id,question_user_email,question_username,question_user_location,answer_id,answer_text,answer_date,answer_user_id,answer_user_email,answer_username,answer_user_location,answer_helpful_yes,answer_helpful_no)
-from '/Users/karinaizawa/Desktop/questions-section/data-generation/generatedData/100-tester.csv'
+from '/Users/karinaizawa/Desktop/questions-section/data-generation/generatedData/appa.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -109,4 +109,9 @@ SELECT
 	answers.answer_helpful_no
 FROM questions
 INNER JOIN answers ON questions.question_id = answers.question_id
-WHERE questions.product_id = 1;
+WHERE questions.product_id = 9999999;
+
+SELECT
+   COUNT(*)
+FROM
+   answers;
