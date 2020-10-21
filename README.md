@@ -1,4 +1,8 @@
 # DBMS Benchmarking
+- 37,495,494 total rows imported into Cassandra (around 1 hr 15 min)
+- 37,500,494 total rows imported into PostgresSQL (not sure why this number is higher)
+  - 37,500,494 rows in answers table
+  - 24,999,590 rows in questions table
 
 ## Cassandra (winner)
 - around 2-10 ms typically
