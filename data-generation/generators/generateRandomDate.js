@@ -17,31 +17,12 @@ function generateRandomDateWithinLastThreeMonths() {
   const rangeOfNowAndThreeMonthsAgo = moment.rangeFromInterval(interval, count);
 
   // eslint-disable-next-line max-len
-  const randomDateWithinLastThreeMonths = generateRandomDate(rangeOfNowAndThreeMonthsAgo.start, rangeOfNowAndThreeMonthsAgo.end);
-  const dateNow = new Date();
-
-  let differenceInMonths = new Date(dateNow - randomDateWithinLastThreeMonths);
-  differenceInMonths = differenceInMonths.getUTCMonth();
-
-  let finalDateValue = '';
-  if (differenceInMonths === 0) {
-    const diff = new Date(dateNow.getTime() - randomDateWithinLastThreeMonths.getTime());
-    const differenceInDays = Math.round(diff / (1000 * 3600 * 24));
-    if (differenceInDays === 1) {
-      finalDateValue = (`${differenceInDays} day ago`);
-    } else if (differenceInDays === 0) {
-      const randomHoursAgo = Math.floor(Math.random() * (23 - 2 + 1) + 2);
-      finalDateValue = (`${randomHoursAgo} hours ago`);
-    } else {
-      finalDateValue = (`${differenceInDays} days ago`);
-    }
-  } else if (differenceInMonths === 1) {
-    finalDateValue = (`${differenceInMonths} month ago`);
-  } else {
-    finalDateValue = (`${differenceInMonths} months ago`);
-  }
-  return finalDateValue;
+  let randomDateWithinLastThreeMonths = generateRandomDate(rangeOfNowAndThreeMonthsAgo.start, rangeOfNowAndThreeMonthsAgo.end);
+  randomDateWithinLastThreeMonths = randomDateWithinLastThreeMonths.toISOString().split("T")[0];
+  return (randomDateWithinLastThreeMonths);
 }
+
+// console.log(generateRandomDateWithinLastThreeMonths());
 
 module.exports = {
   generateRandomDateWithinLastThreeMonths,
