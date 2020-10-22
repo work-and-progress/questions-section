@@ -49,3 +49,9 @@ SELECT
 FROM unzwilling_questions.questions_by_product_id
 where product_id = 9999999
 order by question_date desc;
+
+-------------------
+--indexing
+create index question_date on unzwilling_questions.questions_by_product_id(question_date);
+
+-- not sure if it even helped
