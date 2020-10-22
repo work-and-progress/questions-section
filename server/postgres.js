@@ -25,5 +25,5 @@ app.get('/questions/:productID', cors(), (req, res) => {
 
 /*--------------------------------------*/
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  console.log(`Server for PostgreSQL listening on port ${port}`);
 });
