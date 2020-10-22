@@ -111,7 +111,17 @@ FROM questions
 INNER JOIN answers ON questions.question_id = answers.question_id
 WHERE questions.product_id = 9999999;
 
+
+-------------------------------------------------
 SELECT
    COUNT(*)
 FROM
    answers;
+
+---------------------------------------------------
+create index on questions (product_id);
+create index on answers (product_id);
+
+--******************** important!!
+create index on questions (question_id);
+create index on answers (question_id);
