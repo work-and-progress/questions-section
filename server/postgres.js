@@ -23,6 +23,15 @@ app.get('/questions/:productID', cors(), (req, res) => {
   });
 });
 
+app.post('/questions', cors(), (req, res) => {
+  postgres.postQuestion(req.body, (err, results) => {
+    if (err) {
+      res.status(404).send('Error in app.get - getting questions');
+    } else {
+      res.status(201).send(results);
+    }
+  });
+});
 /*--------------------------------------*/
 app.listen(port, () => {
   console.log(`Server for PostgreSQL listening on port ${port}`);

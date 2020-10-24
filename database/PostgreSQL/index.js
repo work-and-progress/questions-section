@@ -1,10 +1,7 @@
 // https://node-postgres.com/
-
-// pool of connections
-
-const { Postgres } = require('pg');
-// eslint-disable-next-line prefer-destructuring
-const Pool = require('pg').Pool;
+// called pool because there are a pool of connections
+const { Pool } = require('pg');
+const faker = require('faker');
 
 const pool = new Pool({
   user: 'karinaizawa',
@@ -22,7 +19,6 @@ const getQuestions = (id, callback) => {
       if (error) {
         throw error;
       } else {
-        // console.log(results.rows);
         callback(null, results.rows);
       }
     },
@@ -30,23 +26,24 @@ const getQuestions = (id, callback) => {
   );
 };
 
-// const postQuestion = (callback) => {
-//   pool.query(
-//     '',
-//     [id],
-//     (error, results) => {
-//       if (error) {
-//         throw error;
-//       } else {
-//         // console.log(results.rows);
-//         callback(null, results.rows);
-//       }
-//     },
-
-//   );
-// };
+const randomQuestionID = faker.random.uuid();
+console.log('randomQuestionID', randomQuestionID)
+const randomUserID = faker.random.uuid();
+console.log('randomUserID', randomUserID)
+const postQuestion = (request, callback) => {
+  console.log(request)
+  const query = `INSERT INTO questions (question_id, product_id, question_text, question_user_id, question_date, question_user_email, question_username, question_user_location) values ('${randomQuestionID}',${request.product_id},'${request.question_text}','${randomUserID}','${request.question_date}','${request.question_user_email}','${request.question_username}','${request.question_user_location}')`;
+  console.log(query);
+  pool.query(query, (error, results) => {
+    if (error) {
+      throw error;
+    } else {
+      callback(null, results);
+    }
+  });
+};
 
 module.exports = {
   getQuestions,
-  // postQuestion,
+  postQuestion,
 };
