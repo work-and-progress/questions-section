@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const db = require('../database/index.js');
+const cassandra = require('../database/Cassandra/index.js');
 
 const app = express();
 const port = 3003;
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 /*--------------------------------------*/
 app.get('/questions/:productID', cors(), (req, res) => {
-  db.getAllQuestionsForOneProduct(req.params.productID, (err, results) => {
+  cassandra.getQuestions(req.params.productID, (err, results) => {
     if (err) {
       res.status(404).send('Error in app.get - getting questions');
     } else {
@@ -23,6 +23,15 @@ app.get('/questions/:productID', cors(), (req, res) => {
   });
 });
 
+app.post('/questions', cors(), (req, res) => {
+  cassandra.postQuestion(req.body, (err, results) => {
+    if (err) {
+      res.status(404).send('Error in app.get - getting questions');
+    } else {
+      res.status(201).send(results);
+    }
+  });
+});
 /*--------------------------------------*/
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
