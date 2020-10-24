@@ -23,8 +23,38 @@ app.get('/questions/:productID', cors(), (req, res) => {
   });
 });
 
+app.get('/answers/:productID', cors(), (req, res) => {
+  postgres.getQuestions(req.params.productID, (err, results) => {
+    if (err) {
+      res.status(404).send('Error in app.get - getting questions');
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});
+
+app.get('/questionsAndAnswers/:productID', cors(), (req, res) => {
+  postgres.getQuestionAndAnswers(req.params.productID, (err, results) => {
+    if (err) {
+      res.status(404).send('Error in app.get - getting questions');
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});
+
 app.post('/questions', cors(), (req, res) => {
   postgres.postQuestion(req.body, (err, results) => {
+    if (err) {
+      res.status(404).send('Error in app.get - getting questions');
+    } else {
+      res.status(201).send(results);
+    }
+  });
+});
+
+app.post('/answers', cors(), (req, res) => {
+  postgres.postAnswer(req.body, (err, results) => {
     if (err) {
       res.status(404).send('Error in app.get - getting questions');
     } else {
