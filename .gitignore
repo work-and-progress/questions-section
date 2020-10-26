@@ -5,5 +5,7 @@ coverage
 *.DS_Store
 .DS_Store
 __mocks__/
+newrelic.js
+newrelic_agent.log
 
 data-generation/generatedData/
