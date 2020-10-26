@@ -49,3 +49,36 @@ SELECT
 FROM unzwilling_questions.questions_by_product_id
 where product_id = 9999999
 order by question_date desc;
+
+insert into unzwilling_questions.questions_by_product_id (
+  product_id,
+  question_date,
+  question_id,
+	question_text,
+	question_username,
+	answer_id,
+	answer_text,
+	answer_date,
+  answer_username,
+	answer_helpful_yes,
+	answer_helpful_no
+)
+values (
+  $1,
+  $2,
+  $3,
+  $4,
+  $5,
+  $6,
+  $7,
+  $8,
+  $9,
+  $10,
+  $11
+);
+
+-------------------
+--indexing
+create index question_date on unzwilling_questions.questions_by_product_id(question_date);
+
+-- not sure if it even helped
