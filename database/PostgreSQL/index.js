@@ -44,11 +44,10 @@ const getAnswers = (id, callback) => {
   });
 };
 
-const randomQuestionID = faker.random.uuid();
-const randomUserID = faker.random.uuid();
 const postQuestion = (request, callback) => {
-  const query = `INSERT INTO questions (question_id, product_id, question_text, question_user_id, question_date, question_user_email, question_username, question_user_location) values ('${randomQuestionID}',${request.product_id},'${request.question_text}','${randomUserID}','${request.question_date}','${request.question_user_email}','${request.question_username}','${request.question_user_location}')`;
+  const query = `INSERT INTO questions (question_id, product_id, question_text, question_user_id, question_date, question_user_email, question_username, question_user_location) values ('${faker.random.uuid()}',${request.product_id},'${request.question_text}','${faker.random.uuid()}','${request.question_date}','${request.question_user_email}','${request.question_username}','${request.question_user_location}')`;
   pool.query(query, (error, results) => {
+    // console.log(query);
     if (error) {
       throw error;
     } else {
@@ -57,12 +56,11 @@ const postQuestion = (request, callback) => {
   });
 };
 
-const randomAnswerID = faker.random.uuid();
-const randomUserAnswerID = faker.random.uuid();
 const postAnswer = (request, callback) => {
   const query = `INSERT INTO answers (answer_id, product_id, question_id, answer_text, answer_date, answer_user_id, answer_user_email, answer_username, answer_user_location, answer_helpful_yes, answer_helpful_no) values
-  ('${randomAnswerID}','${request.product_id}','${request.question_id}','${request.answer_text}','${request.answer_date}','${randomUserAnswerID}','${request.answer_user_email}','${request.answer_username}','${request.answer_user_location}','${request.answer_helpful_yes}','${request.answer_helpful_no}')`;
+  ('${faker.random.uuid()}','${request.product_id}','${request.question_id}','${request.answer_text}','${request.answer_date}','${faker.random.uuid()}','${request.answer_user_email}','${request.answer_username}','${request.answer_user_location}','${request.answer_helpful_yes}','${request.answer_helpful_no}')`;
   pool.query(query, (error, results) => {
+    // console.log(query);
     if (error) {
       throw error;
     } else {
